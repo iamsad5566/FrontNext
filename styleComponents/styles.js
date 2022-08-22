@@ -27,8 +27,7 @@ class StyleComponent {
   };
 
   sytleForPhotoContainer = {
-    width: "100%",
-    height: "100%",
+    display: "block",
   };
 
   styleForIntro = {
@@ -64,6 +63,35 @@ class StyleComponent {
 
   styleForIcon = {
     marginRight: "1vh",
+  };
+
+  styleForFormat = {
+    margin: "auto",
+    position: "relative",
+    textAlign: "left",
+    height: "100%",
+    width: "100%",
+    zIndex: "-1",
+    padding: "50px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  styleForFont = {
+    height: "17em",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    textAlign: "center",
+    fontStyle: "italic",
+    fontFamily: "Georgia",
+    fontSize: "25px",
+    testHeight: "50px",
+    color: "rgb(184, 134, 11)",
+    padding: "50px",
+    zIndex: "3",
   };
 }
 

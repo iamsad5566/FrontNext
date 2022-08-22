@@ -1,9 +1,12 @@
-import axios from "axios";
+import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
 import AuthenticationService from "../api/AuthenticationService";
 import HomePageService from "../api/HomePageService";
 import Setting from "../../setting";
 import StyleComponent from "../styleComponents/styles";
+import HeaderHomePage from "../header/headerHomePage";
+import ShootingStar from "../component/homePage/shootingStar";
+import Cover from "../component/homePage/cover";
 
 const Home = () => {
   const [loginButton, setLoginButton] = useState("Login if you are yk");
@@ -63,7 +66,35 @@ const Home = () => {
   let style = new StyleComponent();
   return (
     <React.Fragment>
-      <h1>Hello</h1>
+      <HeaderHomePage />
+
+      <div className="container-fluid" style={style.styleForContainer}>
+        <ShootingStar />
+        <div className="row" id="cover">
+          <Cover />
+        </div>
+
+        <div className="row" id="picContainer">
+          <div>
+            <span
+              style={{
+                width: "50%",
+                height: "20%",
+                display: "inline-block",
+                background: "rgba(218, 218, 218, 1)",
+              }}
+            >
+              <a href="/" className="photo">
+                <h2 id="myName">YK Chen</h2>
+                <img id="yk" src="./myPic.jpeg" alt="AAA" />
+                <div className="glow-wrap">
+                  <i className="glow"></i>
+                </div>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
     </React.Fragment>
   );
 };
