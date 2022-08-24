@@ -12,9 +12,9 @@ const Timer = (props) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSeconds((seconds) => seconds + 0.1);
-      setOpacity((op) => op + 0.025);
-    }, 100);
+      setSeconds((seconds) => seconds + 0.02);
+      setOpacity((op) => op + 0.005);
+    }, 20);
     return () => clearInterval(interval);
   }, []);
 

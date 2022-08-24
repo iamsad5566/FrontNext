@@ -74,16 +74,12 @@ const Home = () => {
           <Cover />
         </div>
 
-        <div className="row" id="picContainer">
-          <div>
-            <span
-              style={{
-                width: "50%",
-                height: "20%",
-                display: "inline-block",
-                background: "rgba(218, 218, 218, 1)",
-              }}
-            >
+        <div style={{ textAlign: "center", width: "100%" }}>
+          <span
+            id="picContainer"
+            style={{ display: "inline-block", marginTop: "2em" }}
+          >
+            <div className="col-sm-5 p-5" style={style.sytleForPhotoContainer}>
               <a href="/" className="photo">
                 <h2 id="myName">YK Chen</h2>
                 <img id="yk" src="./myPic.jpeg" alt="AAA" />
@@ -91,8 +87,8 @@ const Home = () => {
                   <i className="glow"></i>
                 </div>
               </a>
-            </span>
-          </div>
+            </div>
+          </span>
         </div>
       </div>
     </React.Fragment>
