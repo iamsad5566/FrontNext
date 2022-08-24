@@ -2,6 +2,8 @@ class StyleComponent {
   styleForContainer = {
     position: "relative",
     top: "1px",
+    width: "100%",
+    height: "100vh",
   };
 
   styleForPutInCenter = {
