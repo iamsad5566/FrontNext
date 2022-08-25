@@ -15,11 +15,15 @@ class HomePageService {
   }
 
   saveWork(title, url, iconUrl) {
-    return axios.post(this.address + "work/saveWork", {
-      title: title,
-      url: url,
-      iconUrl: iconUrl,
-    });
+    return axios.post(
+      this.address + "work/saveWork",
+      {
+        title: title,
+        url: url,
+        iconUrl: iconUrl,
+      },
+      this.config
+    );
   }
 
   getWorks() {

@@ -57,10 +57,13 @@ const Home = () => {
       authenticationService.login("guest", "guest");
       homePageService.saveToken(sessionStorage.getItem("guest"));
     } else {
-      homePageService.saveToken(sessionStorage.setItem(setting.admin));
+      let homePageService = new HomePageService();
+      homePageService.saveToken(sessionStorage.getItem(setting.admin));
+      console.log("ok");
       setLoggedIn(true);
     }
 
+    console.log(homePageService.config);
     homePageService.getWorks().then((response) => {
       setWorks(response.data.reverse());
     });
@@ -76,6 +79,8 @@ const Home = () => {
     <HelmetProvider>
       <Helmet>
         <title>Yen-Kuang Chen</title>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/gorilla.jpg" type="image/x-icon" />
         <meta property="og:url" content="https://tw-yk.com" />
         <meta property="og:locale" content="en_US" />
         <meta
@@ -94,7 +99,7 @@ const Home = () => {
           href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
           rel="stylesheet"
         />
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js" async />
       </Helmet>
       <NavBar />
 
@@ -105,20 +110,27 @@ const Home = () => {
         </div>
 
         <div style={{ textAlign: "center", width: "100%" }}>
-          <span
-            id="picContainer"
-            style={{ display: "inline-block", marginTop: "2em" }}
-          >
-            <div className="col-sm-5 p-5" style={style.sytleForPhotoContainer}>
-              <a href="/" className="photo">
-                <h2 id="myName">YK Chen</h2>
-                <img id="yk" src="./myPic.jpeg" alt="AAA" />
-                <div className="glow-wrap">
-                  <i className="glow"></i>
-                </div>
-              </a>
-            </div>
-          </span>
+          <picture>
+            <span
+              id="picContainer"
+              style={{ display: "inline-block", marginTop: "2em" }}
+            >
+              <div
+                className="col-sm-5 p-5"
+                style={style.sytleForPhotoContainer}
+              >
+                <a href="#" className="photo">
+                  <h2 id="myName">YK Chen</h2>
+
+                  <img id="yk" src="./myPic.jpeg" alt="AAA" />
+
+                  <div className="glow-wrap">
+                    <i className="glow"></i>
+                  </div>
+                </a>
+              </div>
+            </span>
+          </picture>
         </div>
 
         <div className="row" style={style.styleForIntro}>
@@ -163,8 +175,7 @@ const Home = () => {
               <></>
             ) : (
               <Link href="/addWork" className="btn btn-primary">
-                {" "}
-                Add work{" "}
+                Add work
               </Link>
             )}
             {works.map((work) => {
@@ -211,13 +222,15 @@ const Home = () => {
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
           <div className="col-md-4 d-flex align-items-center">
             <a
-              href="/"
+              href="#"
               className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
             >
-              <svg className="bi" width="30" height="30"></svg>
-              <span className="text-muted">
-                <img src="gorilla.jpg" alt="qq" />
-              </span>
+              <picture>
+                <svg className="bi" width="30" height="30"></svg>
+                <span className="text-muted">
+                  <img src="gorilla.jpg" alt="qq" />
+                </span>
+              </picture>
             </a>
 
             <a
@@ -226,12 +239,14 @@ const Home = () => {
               rel="noreferrer"
               style={style.styleForLeetCodeIcon}
             >
-              <img
-                src="https://cdn.iconscout.com/icon/free/png-256/leetcode-3521542-2944960.png"
-                width="50"
-                height="50"
-                alt="NG"
-              />
+              <picture>
+                <img
+                  src="https://cdn.iconscout.com/icon/free/png-256/leetcode-3521542-2944960.png"
+                  width="50"
+                  height="50"
+                  alt="NG"
+                />
+              </picture>
             </a>
 
             <a
@@ -240,12 +255,14 @@ const Home = () => {
               rel="noreferrer"
               style={style.styleForLeetCodeIcon}
             >
-              <img
-                src="https://github.githubassets.com/apple-touch-icon-60x60.png"
-                width="50"
-                height="50"
-                alt="NG"
-              />
+              <picture>
+                <img
+                  src="https://github.githubassets.com/apple-touch-icon-60x60.png"
+                  width="50"
+                  height="50"
+                  alt="NG"
+                />
+              </picture>
             </a>
 
             <a
