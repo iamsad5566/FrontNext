@@ -10,7 +10,10 @@ const EmpTable = () => {
   return (
     <React.Fragment>
       <h3 style={styleForTitle}>EMPLOYMENT</h3>
-      <table className="table table-danger table-striped">
+      <table
+        className="table table-danger table-striped"
+        style={{ fontWeight: "bold" }}
+      >
         <tbody>
           <tr>
             <th scope="row" style={styleForTh}>

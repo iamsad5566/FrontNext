@@ -11,7 +11,10 @@ const PublicationTable = () => {
   return (
     <React.Fragment>
       <h3 style={styleForTitle}>PUBLICATION</h3>
-      <table className="table table-success table-striped">
+      <table
+        className="table table-success table-striped"
+        style={{ fontWeight: "bold" }}
+      >
         <tbody>
           <tr>
             <th scope="row" style={styleForTh}>
