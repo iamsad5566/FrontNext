@@ -3,13 +3,13 @@ import AuthenticationService from "../api/AuthenticationService";
 import HomePageService from "../api/HomePageService";
 import Setting from "../../setting";
 import StyleComponent from "../styleComponents/styles";
-import HeaderHomePage from "../header/headerHomePage";
 import ShootingStar from "../component/homePage/shootingStar";
 import Cover from "../component/homePage/cover";
 import NavBar from "../component/navbar";
 import IntroManager from "../component/homePage/introManager";
 import Intro from "../component/homePage/intro";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import TableInterface from "../component/homePage/tableComponent/tableInterface";
 
 const Home = () => {
   const [loginButton, setLoginButton] = useState("Login if you are yk");
@@ -93,7 +93,6 @@ const Home = () => {
         />
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
       </Helmet>
-      <HeaderHomePage />
       <NavBar />
 
       <div className="container-fluid" style={style.styleForContainer}>
@@ -141,6 +140,12 @@ const Home = () => {
             ) : (
               <></>
             )}
+          </div>
+        </div>
+
+        <div className="row" style={style.styleForContainer}>
+          <div className="col-sm-8 p-4" style={style.styleForPutInCenter}>
+            <TableInterface />
           </div>
         </div>
       </div>
