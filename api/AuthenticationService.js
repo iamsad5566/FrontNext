@@ -7,14 +7,10 @@ class AuthenticationService {
 
   // Execute JWT authentication service
   login(userName, userPassword) {
-    axios
-      .post(
-        this.address +
-          `auth/login?userName=${userName}&userPassword=${userPassword}`
-      )
-      .then((response) => {
-        this.registerLogin(userName, response.data.token);
-      });
+    return axios.post(
+      this.address +
+        `auth/login?userName=${userName}&userPassword=${userPassword}`
+    );
   }
 
   // Register successfuly login
@@ -44,7 +40,6 @@ class AuthenticationService {
     if (user === null) {
       return false;
     } else {
-      this.setupAxiosInterceptor(sessionStorage.getItem(user));
       return true;
     }
   }
