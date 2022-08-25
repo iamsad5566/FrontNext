@@ -12,7 +12,10 @@ const EduTable = () => {
   return (
     <React.Fragment>
       <h3 style={styleForTitle}>EDUCATION</h3>
-      <table className="table table-primary table-striped">
+      <table
+        className="table table-primary table-striped"
+        style={{ fontWeight: "bold" }}
+      >
         <tbody>
           <tr>
             <th scope="row" style={styleForTh}>

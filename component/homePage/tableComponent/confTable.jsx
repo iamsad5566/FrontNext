@@ -7,7 +7,10 @@ const ConfTable = () => {
   return (
     <React.Fragment>
       <h3 style={styleForTitle}> CONFERENCE PRESENTATIONS </h3>
-      <table className="table table-secondary table-striped">
+      <table
+        className="table table-secondary table-striped"
+        style={{ fontWeight: "bold" }}
+      >
         <tbody>
           <tr>
             <td>

@@ -388,7 +388,8 @@ button:focus:not(:focus-visible) {
 }
 
 #tableSelect {
-  border-radius: 70% 50% 30% 10%;
+  border-radius: 70% 80% 30% 10%;
+  font-weight: bold;
 }
 
 input,
@@ -640,7 +641,7 @@ a {
 .photo > img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   filter: grayscale(30%) contrast(120%);
   box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.2);
   display: block;
@@ -905,10 +906,6 @@ input[type="checkbox"] {
   margin: auto;
 }
 
-#tableSelect {
-  border-radius: 70% 50% 30% 10%;
-}
-
 .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -1135,6 +1132,14 @@ input[type="checkbox"] {
   --bs-gutter-y: 3rem;
 }
 
+#worksContainer::-webkit-scrollbar {
+  display: none;
+}
+
+#worksContainer {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 /* 
   ************************************************************
   ************************************************************
@@ -1164,7 +1169,7 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     text-align: center;
-    height: 38vh;
+    height: auto;
     width: 95%;
     margin: auto;
   }
