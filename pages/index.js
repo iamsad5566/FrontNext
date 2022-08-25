@@ -1,12 +1,15 @@
-import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
 import AuthenticationService from "../api/AuthenticationService";
 import HomePageService from "../api/HomePageService";
 import Setting from "../../setting";
 import StyleComponent from "../styleComponents/styles";
-import HeaderHomePage from "../header/headerHomePage";
 import ShootingStar from "../component/homePage/shootingStar";
 import Cover from "../component/homePage/cover";
+import NavBar from "../component/navbar";
+import IntroManager from "../component/homePage/introManager";
+import Intro from "../component/homePage/intro";
+import { HelmetProvider, Helmet } from "react-helmet-async";
+import TableInterface from "../component/homePage/tableComponent/tableInterface";
 
 const Home = () => {
   const [loginButton, setLoginButton] = useState("Login if you are yk");
@@ -14,6 +17,7 @@ const Home = () => {
   const [works, setWorks] = useState([]);
   const [intro, setIntro] = useState("");
   const [loading, setLoading] = useState(true);
+  const [hasLoggedIn, setLoggedIn] = useState(false);
   let authenticationService = new AuthenticationService();
   let homePageService = new HomePageService();
   let setting = new Setting();
@@ -51,6 +55,7 @@ const Home = () => {
       homePageService.saveToken(sessionStorage.getItem("guest"));
     } else {
       homePageService.saveToken(sessionStorage.setItem(setting.admin));
+      setLoggedIn(true);
     }
 
     homePageService.getWorks().then((response) => {
@@ -65,8 +70,30 @@ const Home = () => {
 
   let style = new StyleComponent();
   return (
-    <React.Fragment>
-      <HeaderHomePage />
+    <HelmetProvider>
+      <Helmet>
+        <title>Yen-Kuang Chen</title>
+        <meta property="og:url" content="https://tw-yk.com" />
+        <meta property="og:locale" content="en_US" />
+        <meta
+          property="og:description"
+          content="Welcome to my website! I'm dedicated to updating this web, so just feel free to come anytime, maybe you will find something new and interesting!"
+        />
+        <meta property="og:title" content="彥匡ㄉ家" />
+        <meta property="og:type" content="website" />
+        <meta property="fb:admins" content="153906327962277" />
+        <meta property="og:image" content="https://tw-yk.com/2.jpeg" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
+          rel="stylesheet"
+        />
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+      </Helmet>
+      <NavBar />
 
       <div className="container-fluid" style={style.styleForContainer}>
         <ShootingStar />
@@ -90,8 +117,39 @@ const Home = () => {
             </div>
           </span>
         </div>
+
+        <div className="row" style={style.styleForIntro}>
+          <div
+            className="introContainer"
+            id="introContainer"
+            style={style.styleForIntroContainer}
+          >
+            {updating ? (
+              <IntroManager
+                handleSubmitIntro={handleSubmitIntro}
+                content={intro}
+              />
+            ) : (
+              <Intro content={intro} loading={loading} />
+            )}
+            <div style={{ height: "2em" }}></div>
+            {hasLoggedIn && !updating ? (
+              <button className="btn btn-primary" onClick={handleUpdateIntro}>
+                Update
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+
+        <div className="row" style={style.styleForContainer}>
+          <div className="col-sm-8 p-4" style={style.styleForPutInCenter}>
+            <TableInterface />
+          </div>
+        </div>
       </div>
-    </React.Fragment>
+    </HelmetProvider>
   );
 };
 
