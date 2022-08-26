@@ -16,9 +16,9 @@ const MainContent = (props) => {
   let authenticationService = new AuthenticationService();
   let setting = new Setting();
   let id = 0;
-  const numberOfItems = props.rowsForEachCategory;
+  const numbersOfItems = props.rowsForEachCategory;
 
-  const handleChangePage = (page) => {
+  const handlePageChange = (page) => {
     setCurrentPage(page);
     let tmpOffset = (page - 1) * pageSize;
     setOffset(tmpOffset);
@@ -45,7 +45,7 @@ const MainContent = (props) => {
       let rows = last < pageSize ? last : pageSize;
       setLoading(true);
       blogService
-        .getPageContent(offset, pageSize, props.category)
+        .getPageContent(offset, rows, props.category)
         .then((response) => {
           setArticles(response.data);
           setLoading(false);
@@ -53,6 +53,20 @@ const MainContent = (props) => {
     }
   };
 
+  const handlePageMinus = (page) => {
+    if (page > 1) {
+      setCurrentPage((currentPage) => currentPage - 1);
+      let tmpOffset = offset - pageSize;
+      setOffset(tmpOffset);
+      setLoading(true);
+      blogService
+        .getPageContent(offset, pageSize, props.category)
+        .then((response) => {
+          setArticles(response.data);
+          setLoading(false);
+        });
+    }
+  };
   useEffect(() => {
     const getArticles = () => {
       blogService
@@ -80,14 +94,14 @@ const MainContent = (props) => {
 
   return (
     <React.Fragment>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", marginTop: "3em" }}>
         <div className="container px-4 px-lg-5">
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div
               className="col-md-10 col-lg-8 col-xl-7"
               style={{ textAlign: "left" }}
             >
-              {authenticationService.isUserLoggedIn() ? (
+              {authenticationService.isLoggedIn() ? (
                 <Link
                   href="add"
                   className="btn btn-primary"
@@ -111,14 +125,14 @@ const MainContent = (props) => {
                   />
                 ))
               )}
-
+              <div style={{ marginTop: "5em" }}></div>
               <Pagination
                 currentPage={currentPage}
                 pageSize={pageSize}
                 numbersOfItems={numbersOfItems}
-                handlePageChange={this.handlePageChange}
-                handlePageMinus={this.handlePageMinus}
-                handlePagePlus={this.handlePagePlus}
+                handlePageChange={handlePageChange}
+                handlePageMinus={handlePageMinus}
+                handlePagePlus={handlePagePlus}
               />
             </div>
           </div>

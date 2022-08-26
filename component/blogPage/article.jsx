@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import Setting from "../../../setting";
 import AuthenticationService from "../../api/AuthenticationService";
 import BlogService from "../../api/BlogService";
@@ -11,6 +13,7 @@ const Article = (props) => {
   let setting = new Setting();
   let blogService = new BlogService();
   let authenticationService = new AuthenticationService();
+  let loggedIn = false;
 
   const handleDelete = (postId) => {
     if (window.confirm("Are you sure to delete it?")) {
@@ -24,6 +27,7 @@ const Article = (props) => {
 
   useEffect(() => {
     if (authenticationService.isLoggedIn()) {
+      loggedIn = true;
       blogService.saveToken(sessionStorage.getItem(setting.admin));
       blogService.getArticleBrowse(postId).then((response) => {
         setArticleTodayBrowse(response.data[0]);
@@ -33,12 +37,17 @@ const Article = (props) => {
   }, [postId]);
   return (
     <React.Fragment>
-      <div className="post-preview">
+      <div className="post-preview" style={{ margin: "2em 0em" }}>
         <Link href={`${postId}`}>
-          <h2 className="post-title">{title}</h2>
-          <h3 className="post-subtitle">
-            <ReactMarkdown>{content}</ReactMarkdown>
-          </h3>
+          <span id="articleContainer">
+            <h1 className="post-title">{title}</h1>
+            <span
+              className="post-subtitle"
+              style={{ marginTop: "1.5em", lineHeight: 2 }}
+            >
+              <ReactMarkdown>{content}</ReactMarkdown>
+            </span>
+          </span>
         </Link>
 
         <p className="post-meta">
@@ -46,7 +55,7 @@ const Article = (props) => {
           <a href="#!">{"  Yen-Kuang  "}</a>
           on {date}
         </p>
-        {AuthenticationService.isUserLoggedIn() ? (
+        {loggedIn ? (
           <button
             className="btn btn-danger btn-sm"
             style={styleForDeleteButton}
@@ -57,7 +66,7 @@ const Article = (props) => {
         ) : (
           <></>
         )}
-        {AuthenticationService.isUserLoggedIn() ? (
+        {loggedIn ? (
           <div>
             {" "}
             <p>

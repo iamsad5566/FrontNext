@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Setting from "../../../setting";
 import AuthenticationService from "../../api/AuthenticationService";
 import BlogService from "../../api/BlogService";
+import Loading from "../loading";
 import BlogHeader from "./blogHeader";
 import Categories from "./categories";
+import MainContent from "./mainContent";
 
 const BlogInterface = () => {
   const [todayBrowseTimes, setTodayBrowseTimes] = useState(0);
@@ -16,6 +18,7 @@ const BlogInterface = () => {
   const blogService = new BlogService();
   const setting = new Setting();
   let categories = new Categories();
+  let loggedIn = false;
 
   const handleCategory = (event) => {
     setIsLoading(false);
@@ -41,6 +44,7 @@ const BlogInterface = () => {
 
   useEffect(() => {
     if (authenticationService.isLoggedIn()) {
+      loggedIn = true;
       let token = sessionStorage.getItem(setting.admin);
       blogService.saveToken(token);
       getRows();
@@ -85,6 +89,23 @@ const BlogInterface = () => {
             );
           })}
         </select>
+        {isLoading ? (
+          <MainContent
+            rowsForEachCategory={rowsForEachCategory}
+            category={postCategory}
+          />
+        ) : (
+          <Loading />
+        )}
+
+        {loggedIn ? (
+          <div style={styleForBrowseTimes}>
+            {" "}
+            <p>{`今日瀏覽次數：${todayBrowseTimes}， 總瀏覽次數：${totalBrowseTimes}`}</p>{" "}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </React.Fragment>
   );

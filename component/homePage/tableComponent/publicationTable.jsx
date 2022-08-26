@@ -28,6 +28,7 @@ const PublicationTable = () => {
                 id="journalLink"
                 target="_blank"
                 rel="noreferrer"
+                style={{ textDecoration: "none" }}
               >
                 {" "}
                 P3b Does Not Reflect Perceived Contrast{" "}
