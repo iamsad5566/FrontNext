@@ -51,5 +51,20 @@ class BlogService {
       this.config
     );
   }
+
+  saveArticle(title, content, category) {
+    return axios.post(
+      this.address + "article/saveArticle",
+      { title: title, content: content, category: category },
+      this.config
+    );
+  }
+
+  deleteArticle(title) {
+    return axios.delete(
+      this.address + `article/deleteArticle/${title}`,
+      this.config
+    );
+  }
 }
 export default BlogService;

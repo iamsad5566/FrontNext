@@ -1,5 +1,5 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "javascript.suggest.names": true,
-    "editor.formatOnSave": true
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "javascript.suggest.names": true,
+  "editor.formatOnSave": true
 }

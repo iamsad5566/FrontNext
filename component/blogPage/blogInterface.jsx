@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Setting from "../../../setting";
 import AuthenticationService from "../../api/AuthenticationService";
 import BlogService from "../../api/BlogService";
+import BlogHeader from "./blogHeader";
+import Categories from "./categories";
 
 const BlogInterface = () => {
   const [todayBrowseTimes, setTodayBrowseTimes] = useState(0);
@@ -13,6 +15,7 @@ const BlogInterface = () => {
   const authenticationService = new AuthenticationService();
   const blogService = new BlogService();
   const setting = new Setting();
+  let categories = new Categories();
 
   const handleCategory = (event) => {
     setIsLoading(false);
@@ -54,8 +57,6 @@ const BlogInterface = () => {
     }
   }, [postCategory]);
 
-  console.log(todayBrowseTimes);
-
   const styleForBrowseTimes = {
     textAlign: "center",
   };
@@ -65,7 +66,28 @@ const BlogInterface = () => {
     textAlign: "center",
   };
 
-  return <></>;
+  return (
+    <React.Fragment>
+      <BlogHeader />
+      <div style={styleForCategory}>
+        <h2 style={{ display: "inline", fontSize: "1.5em" }}>Category:</h2>
+        <select
+          style={{ marginLeft: "1em" }}
+          value={postCategory}
+          onChange={(event) => handleCategory(event)}
+        >
+          {categories.all.map((category) => {
+            return (
+              <option value={category} key={key++}>
+                {" "}
+                {category}{" "}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+    </React.Fragment>
+  );
 };
 
 export default BlogInterface;
