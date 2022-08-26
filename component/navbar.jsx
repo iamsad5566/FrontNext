@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 const NavBar = () => {
-  const handleRefresh = () => {
+  const handleClick = () => {
     document.getElementById("menuBar").click();
   };
 
@@ -15,12 +15,12 @@ const NavBar = () => {
       <div className="wrapper">
         <ul>
           <li>
-            <a href="#" onClick={handleRefresh}>
-              Home
-            </a>
+            <Link href="/">
+              <a onClick={handleClick}>Home</a>
+            </Link>
           </li>
           <li>
-            <a href="#">Blog</a>
+            <Link href="/blog">Blog</Link>
           </li>
           <li>
             <a href="#">Psy</a>

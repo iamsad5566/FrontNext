@@ -20,9 +20,9 @@ const Home = () => {
   const [intro, setIntro] = useState("");
   const [loading, setLoading] = useState(true);
   const [hasLoggedIn, setLoggedIn] = useState(false);
-  let authenticationService = new AuthenticationService();
-  let homePageService = new HomePageService();
-  let setting = new Setting();
+  const authenticationService = new AuthenticationService();
+  const homePageService = new HomePageService();
+  const setting = new Setting();
   let workKey = 1;
 
   const logout = () => {
@@ -53,25 +53,33 @@ const Home = () => {
   };
 
   useEffect(() => {
+    const getData = () => {
+      homePageService.getWorks().then((response) => {
+        setWorks(response.data.reverse());
+      });
+
+      homePageService.getIntro().then((response) => {
+        setIntro(response.data);
+      });
+      setLoading(false);
+    };
+
     if (!authenticationService.isLoggedIn()) {
-      authenticationService.login("guest", "guest");
-      homePageService.saveToken(sessionStorage.getItem("guest"));
+      authenticationService
+        .login("guest", "guest")
+        .then((response) => {
+          authenticationService.registerLogin("guest", response.data.token);
+          homePageService.saveToken(sessionStorage.getItem("guest"));
+        })
+        .then(() => {
+          getData();
+        });
     } else {
       let homePageService = new HomePageService();
       homePageService.saveToken(sessionStorage.getItem(setting.admin));
-      console.log("ok");
       setLoggedIn(true);
+      getData();
     }
-
-    console.log(homePageService.config);
-    homePageService.getWorks().then((response) => {
-      setWorks(response.data.reverse());
-    });
-
-    homePageService.getIntro().then((response) => {
-      setIntro(response.data);
-    });
-    setLoading(false);
   }, []);
 
   let style = new StyleComponent();
@@ -240,12 +248,7 @@ const Home = () => {
               style={style.styleForLeetCodeIcon}
             >
               <picture>
-                <img
-                  src="https://cdn.iconscout.com/icon/free/png-256/leetcode-3521542-2944960.png"
-                  width="50"
-                  height="50"
-                  alt="NG"
-                />
+                <img src="/leetcode.png" width="50" height="50" alt="NG" />
               </picture>
             </a>
 

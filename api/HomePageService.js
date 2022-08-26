@@ -1,11 +1,9 @@
 import Setting from "../../setting";
 import axios from "axios";
-import AuthenticationService from "./AuthenticationService";
 
 class HomePageService {
   setting = new Setting();
   address = this.setting.prefixAddress;
-  authenticationService = new AuthenticationService();
   config = {
     headers: { Authorization: "" },
   };
