@@ -765,7 +765,7 @@ a {
   /* clip-path: circle(25px at calc(0% + 45px) 45px); */
   background: #000;
   clip-path: circle(30px at calc(100% - 70px) 70px);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
   z-index: 2;
 }
 #active:checked ~ .wrapper {
@@ -846,6 +846,7 @@ a {
 input[type="checkbox"] {
   display: none;
 }
+
 .content {
   position: absolute;
   top: 50%;
@@ -1140,6 +1141,179 @@ input[type="checkbox"] {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+#journalLink {
+  color: rgb(12, 12, 170);
+}
+
+#journalLink:hover {
+  color: rgb(192, 51, 51);
+}
+
+#loading {
+  cursor: pointer;
+  /* STEP 2：使用 rotate 動畫效果在 svg 圖示上 */
+  animation: rotate infinite 1.5s linear;
+}
+
+/* STEP 1：定義旋轉的動畫效果，並取名為 rotate */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+pre {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+.col-xl-10 li code {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  font-size: 90%;
+  margin: 0;
+  padding: 0.2em 0;
+}
+
+.col-xl-10 p code {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  font-size: 90%;
+  margin: 0;
+  padding: 0.2em 0;
+}
+
+.col-xl-10 h3 code {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  font-size: 90%;
+  margin: 0;
+  padding: 0.2em 0;
+}
+
+.col-xl-10 h2 code {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  font-size: 90%;
+  margin: 0;
+  padding: 0.2em 0;
+}
+
+.col-xl-10 h1 code {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  font-size: 90%;
+  margin: 0;
+  padding: 0.2em 0;
+}
+
+h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.col-xl-10 h1,
+.col-xl-10 h2,
+.col-xl-10 h3 {
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  margin-top: 24px;
+  padding-bottom: 0.3em;
+  font-size: 1.3em;
+}
+
+.col-xl-10 a {
+  color: #4078c0;
+  text-decoration: none;
+}
+
+.col-xl-10 a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.col-xl-10 blockquote {
+  border-left: 0.25em solid #ddd;
+  color: #777;
+  margin-left: 0;
+  padding: 0 1em;
+  font-style: italic;
+  margin-left: 2em;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+.col-xl-10 p {
+  overflow: scroll;
+}
+
+.col-xl-10 p::-webkit-scrollbar {
+  display: none;
+}
+
+.col-xl-10 p {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+#templateEditor {
+  display: inline-block;
+  height: 85vh;
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #888;
+  resize: vertical;
+  overflow: auto;
+  text-align: justify;
+}
+
+#templateEditor:empty:before {
+  content: attr(placeholder);
+  color: #bbb;
+}
+
+.c3-axis-y text {
+  font-size: 18px;
+}
+
+.c3-axis-x text {
+  font-size: 16px;
+}
+
+.c3-legend-item {
+  font-size: 15px;
+}
+
+.post-subtitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 /* 
   ************************************************************
   ************************************************************
