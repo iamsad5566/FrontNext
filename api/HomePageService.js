@@ -14,7 +14,7 @@ class HomePageService {
 
   saveWork(title, url, iconUrl) {
     return axios.post(
-      this.address + "work/saveWork",
+      this.address + "works/saveWork",
       {
         title: title,
         url: url,

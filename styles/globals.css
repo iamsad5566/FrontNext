@@ -1002,7 +1002,7 @@ input[type="checkbox"] {
   animation: loadingRotate infinite 1.5s linear;
 }
 
-/* STEP 1：定義旋轉的動畫效果，並取名為 rotate */
+/* STEP 1：定義旋轉的動畫效果，並取名為 loadingRotate */
 @keyframes loadingRotate {
   from {
     transform: rotate(0deg);
@@ -1684,6 +1684,31 @@ header.masthead .post-heading .meta a {
 #twMap:hover {
   cursor: pointer;
 }
+
+/* Psychology */
+.psy-title {
+  text-decoration: none;
+  color: #000;
+  background-color: #ffffff86;
+  border-radius: 50px;
+}
+
+.psy-title:hover {
+  border-radius: 50px;
+  z-index: 1;
+  animation: rotatePsy 5s linear infinite;
+}
+
+@keyframes rotatePsy {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/*  */
 
 /* Container */
 

@@ -23,7 +23,7 @@ const NavBar = () => {
             <Link href="/blog">Blog</Link>
           </li>
           <li>
-            <a href="#">Psy</a>
+            <Link href="/psychology">Psy</Link>
           </li>
           <li>
             <a href="#">Other services</a>

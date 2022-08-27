@@ -41,10 +41,10 @@ class BlogService {
     );
   }
 
-  updatePost(title, content, postId) {
+  updatePost(title, content, postId, category) {
     return axios.put(
       this.address + "article/updateArticle",
-      { title: title, content: content, postId: postId },
+      { title: title, content: content, postId: postId, category: category },
       this.config
     );
   }

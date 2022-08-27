@@ -5,24 +5,31 @@ import Setting from "../../../setting";
 import BlogService from "../../api/BlogService";
 import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
+import Categories from "./categories";
 
 const UpdatePost = (props) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
   const [sent, setSent] = useState(false);
   const [successful, setSuccessful] = useState(false);
   let setting = new Setting();
   let blogService = new BlogService();
+  let categories = new Categories();
   let postID = document.baseURI.split("=")[1];
-
+  let key = 0;
   const handleChange = (event) => {
     setTitle(event.target.value);
+  };
+
+  const handleCategory = (event) => {
+    setCategory(event.target.value);
   };
 
   const handleSubmit = () => {
     blogService.saveToken(sessionStorage.getItem(setting.admin));
     blogService
-      .updatePost(title, content, postID)
+      .updatePost(title, content, postID, category)
       .then(() => {
         setSent(true);
         setSuccessful(true);
@@ -118,6 +125,23 @@ const UpdatePost = (props) => {
             }}
           />
         </label>
+      </div>
+
+      <div style={{ textAlign: "center" }}>
+        <span style={{ fontWeight: "bold", fontSize: "1.5em" }}>
+          Category:{" "}
+        </span>
+        <div></div>
+        <select onChange={(event) => handleCategory(event)} value={category}>
+          {categories.all.map((category) => {
+            return (
+              <option key={key++} name={category}>
+                {" "}
+                {category}{" "}
+              </option>
+            );
+          })}
+        </select>
       </div>
 
       <div style={{ margin: "1em 0em 5em 0em" }}>
