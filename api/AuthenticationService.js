@@ -17,7 +17,6 @@ class AuthenticationService {
   registerLogin(userName, token) {
     let jwtToken = this.createToken(token);
     sessionStorage.setItem(userName, jwtToken);
-    this.setupAxiosInterceptor(userName);
   }
 
   // Create token
@@ -26,13 +25,13 @@ class AuthenticationService {
   }
 
   // Setup interceptor
-  setupAxiosInterceptor(userName) {
-    let token = sessionStorage.getItem(userName);
-    axios.interceptors.request.use((config) => {
-      config.headers.Authorization = token;
-      return config;
-    });
-  }
+  // setupAxiosInterceptor(userName) {
+  //   let token = sessionStorage.getItem(userName);
+  //   axios.interceptors.request.use((config) => {
+  //     config.headers.Authorization = token;
+  //     return config;
+  //   });
+  // }
 
   // Return if admin user has logged in
   isLoggedIn() {

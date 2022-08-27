@@ -5,10 +5,11 @@ import Setting from "../../../setting";
 import Loading from "../loading";
 import Article from "./article";
 import Pagination from "./pagination";
+import Link from "next/link";
 
 const MainContent = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
+  const [pageSize] = useState(6);
   const [offset, setOffset] = useState(0);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,12 +27,6 @@ const MainContent = (props) => {
     let last = props.rowsForEachCategory - (page - 1) * pageSize;
     let rows = last < pageSize ? last : pageSize;
     setLoading(true);
-    blogService
-      .getPageContent(offset, rows, props.category)
-      .then((response) => {
-        setArticles(response.data);
-        setLoading(false);
-      });
   };
 
   const handlePagePlus = (page, total) => {
@@ -44,12 +39,6 @@ const MainContent = (props) => {
       let last = total - page * pageSize;
       let rows = last < pageSize ? last : pageSize;
       setLoading(true);
-      blogService
-        .getPageContent(offset, rows, props.category)
-        .then((response) => {
-          setArticles(response.data);
-          setLoading(false);
-        });
     }
   };
 
@@ -59,12 +48,6 @@ const MainContent = (props) => {
       let tmpOffset = offset - pageSize;
       setOffset(tmpOffset);
       setLoading(true);
-      blogService
-        .getPageContent(offset, pageSize, props.category)
-        .then((response) => {
-          setArticles(response.data);
-          setLoading(false);
-        });
     }
   };
   useEffect(() => {
@@ -90,7 +73,7 @@ const MainContent = (props) => {
         getArticles();
       });
     }
-  }, [currentPage]);
+  }, [offset]);
 
   return (
     <React.Fragment>
@@ -102,12 +85,13 @@ const MainContent = (props) => {
               style={{ textAlign: "left" }}
             >
               {authenticationService.isLoggedIn() ? (
-                <Link
-                  href="add"
-                  className="btn btn-primary"
-                  style={{ marginBottom: "3em" }}
-                >
-                  New Post
+                <Link href="/blog/add">
+                  <button
+                    className="btn btn-primary"
+                    style={{ marginBottom: "3em" }}
+                  >
+                    New Post
+                  </button>
                 </Link>
               ) : (
                 <></>
@@ -125,7 +109,7 @@ const MainContent = (props) => {
                   />
                 ))
               )}
-              <div style={{ marginTop: "5em" }}></div>
+              <div style={{ margin: "5em 0em" }}></div>
               <Pagination
                 currentPage={currentPage}
                 pageSize={pageSize}

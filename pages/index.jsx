@@ -31,11 +31,15 @@ const Home = () => {
       alert("logged out!");
       document.cookie = `${setting.admin}=${setting.password};expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
       setLoginButton("Login if you are yk");
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     }
   };
 
   const handleDeleteWork = (title) => {
     if (window.confirm("Are you sure to delete this?")) {
+      homePageService.saveToken(sessionStorage.getItem(setting.admin));
       homePageService
         .deleteWork(title)
         .then(setTimeout(() => window.location.reload(), 100));
@@ -47,6 +51,7 @@ const Home = () => {
   };
 
   const handleSubmitIntro = (value) => {
+    homePageService.saveToken(sessionStorage.getItem(setting.admin));
     homePageService.updateIntro(value.content);
     setUpdating(false);
     setTimeout(() => window.location.reload(), 100);
@@ -75,7 +80,6 @@ const Home = () => {
           getData();
         });
     } else {
-      let homePageService = new HomePageService();
       homePageService.saveToken(sessionStorage.getItem(setting.admin));
       setLoggedIn(true);
       getData();
@@ -182,8 +186,8 @@ const Home = () => {
             {!hasLoggedIn ? (
               <></>
             ) : (
-              <Link href="/addWork" className="btn btn-primary">
-                Add work
+              <Link href="/addWork">
+                <button className="btn btn-primary">Add work</button>
               </Link>
             )}
             {works.map((work) => {

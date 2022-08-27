@@ -19,6 +19,8 @@
     "react-dom": "18.2.0",
     "react-helmet-async": "^1.3.0",
     "react-markdown": "^8.0.3",
+    "react-mde": "^11.5.0",
+    "showdown": "^2.1.0",
     "styled-components": "^5.3.5",
     "vstack-graph": "^0.12.2"
   },

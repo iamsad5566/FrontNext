@@ -13,12 +13,12 @@ const BlogInterface = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [postCategory, setPostCategory] = useState("All");
   const [rowsForEachCategory, setRowsForEachCategory] = useState(0);
+  const [loggedIn, setLoggedIn] = useState(false);
   let key = 0;
   const authenticationService = new AuthenticationService();
   const blogService = new BlogService();
   const setting = new Setting();
   let categories = new Categories();
-  let loggedIn = false;
 
   const handleCategory = (event) => {
     setIsLoading(false);
@@ -44,7 +44,7 @@ const BlogInterface = () => {
 
   useEffect(() => {
     if (authenticationService.isLoggedIn()) {
-      loggedIn = true;
+      setLoggedIn(true);
       let token = sessionStorage.getItem(setting.admin);
       blogService.saveToken(token);
       getRows();
@@ -53,15 +53,18 @@ const BlogInterface = () => {
         .login("guest", "guest")
         .then((response) => {
           authenticationService.registerLogin("guest", response.data.token);
+          blogService.saveToken(sessionStorage.getItem("guest"));
           getRows();
         })
         .catch(() => {
           alert("Someting wrong, please try to reload the page!");
         });
     }
+    document.cookie = "SameSite=Lax; Secure";
   }, [postCategory]);
 
   const styleForBrowseTimes = {
+    top: "10em",
     textAlign: "center",
   };
 
@@ -97,15 +100,14 @@ const BlogInterface = () => {
         ) : (
           <Loading />
         )}
-
-        {loggedIn ? (
-          <div style={styleForBrowseTimes}>
-            {" "}
-            <p>{`今日瀏覽次數：${todayBrowseTimes}， 總瀏覽次數：${totalBrowseTimes}`}</p>{" "}
-          </div>
-        ) : (
-          <></>
-        )}
+        <div style={{ marginTop: "2em" }}></div>
+        <span>
+          {loggedIn ? (
+            <p>{`今日瀏覽次數：${todayBrowseTimes}， 總瀏覽次數：${totalBrowseTimes}`}</p>
+          ) : (
+            <></>
+          )}
+        </span>
       </div>
     </React.Fragment>
   );

@@ -41,6 +41,14 @@ class BlogService {
     );
   }
 
+  updatePost(title, content, postId) {
+    return axios.put(
+      this.address + "article/updateArticle",
+      { title: title, content: content, postId: postId },
+      this.config
+    );
+  }
+
   getBlogBrowse() {
     return axios.get(this.address + `article/getBlogBrowse`, this.config);
   }

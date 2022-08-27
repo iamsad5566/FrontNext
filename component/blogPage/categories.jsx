@@ -1,5 +1,5 @@
-class categories {
+class Categories {
   all = ["All", "Literature", "LeetCode"];
 }
 
-export default categories;
+export default Categories;

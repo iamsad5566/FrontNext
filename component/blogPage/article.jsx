@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Setting from "../../../setting";
@@ -9,14 +10,16 @@ const Article = (props) => {
   const { title, content, date, postId } = props;
   const [articleTodayBrowse, setArticleTodayBrowse] = useState(0);
   const [articleAllBrowse, setArticleAllBrowse] = useState(0);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
 
   let setting = new Setting();
   let blogService = new BlogService();
   let authenticationService = new AuthenticationService();
-  let loggedIn = false;
 
   const handleDelete = (postId) => {
     if (window.confirm("Are you sure to delete it?")) {
+      blogService.saveToken(sessionStorage.getItem(setting.admin));
       blogService.deleteArticle(postId).then(() => {
         setTimeout(() => {
           window.location.reload();
@@ -27,7 +30,7 @@ const Article = (props) => {
 
   useEffect(() => {
     if (authenticationService.isLoggedIn()) {
-      loggedIn = true;
+      setLoggedIn(true);
       blogService.saveToken(sessionStorage.getItem(setting.admin));
       blogService.getArticleBrowse(postId).then((response) => {
         setArticleTodayBrowse(response.data[0]);
@@ -35,30 +38,36 @@ const Article = (props) => {
       });
     }
   }, [postId]);
+
   return (
     <React.Fragment>
       <div className="post-preview" style={{ margin: "2em 0em" }}>
-        <Link href={`${postId}`}>
+        <Link href={`/blog/${postId}`}>
           <span id="articleContainer">
             <h1 className="post-title">{title}</h1>
             <span
               className="post-subtitle"
-              style={{ marginTop: "1.5em", lineHeight: 2 }}
+              style={{
+                marginTop: "1.5em",
+                lineHeight: 2,
+                textAlign: "justify",
+              }}
             >
               <ReactMarkdown>{content}</ReactMarkdown>
             </span>
           </span>
         </Link>
 
-        <p className="post-meta">
+        <p className="post-meta" style={{ marginTop: "2em" }}>
           Posted by
-          <a href="#!">{"  Yen-Kuang  "}</a>
+          <a href="#!" id="author">
+            {"  Yen-Kuang  "}
+          </a>
           on {date}
         </p>
         {loggedIn ? (
           <button
             className="btn btn-danger btn-sm"
-            style={styleForDeleteButton}
             onClick={() => handleDelete(postId)}
           >
             Delete
@@ -67,7 +76,7 @@ const Article = (props) => {
           <></>
         )}
         {loggedIn ? (
-          <div>
+          <div style={{ marginTop: "1.5em" }}>
             {" "}
             <p>
               {" "}
