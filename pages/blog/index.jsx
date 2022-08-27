@@ -7,7 +7,7 @@ const Blog = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>YK's blog</title>
+        <title>YK&apos;s blog</title>
         <meta property="og:url" content="https://tw-yk.com/blog" />
         <meta property="og:locale" content="zh_TW" />
         <meta property="og:description" content="Welcome to my blog!" />
@@ -15,6 +15,7 @@ const Blog = () => {
         <meta property="og:type" content="website" />
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/blog.jpg" />
+        <link rel="icon" href="/chick.ico" type="image/x-icon" />
         <script src="https://kit.fontawesome.com/a076d05399.js" async />
       </Helmet>
       <NavBar />

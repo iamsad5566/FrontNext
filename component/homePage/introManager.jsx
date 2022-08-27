@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 
-const IntroManager = () => {
+const IntroManager = (props) => {
   const { handleSubmitIntro, content } = props;
 
   function onSubmit(value) {
