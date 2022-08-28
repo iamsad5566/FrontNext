@@ -22,12 +22,14 @@ const PsyMainContent = () => {
       setIndent(width * 0.65);
     } else if (width < 768) {
       setIndent(width * 0.15);
+      document.getElementById("back-cover").style.backgroundPosition =
+        "right bottom";
     }
   }, []);
 
   return (
     <React.Fragment>
-      <div style={styleForPutInCenter}>
+      <div id="back-cover" style={styleForPutInCenter}>
         <div
           id="psy-list"
           style={{ display: "block", width: "100%", overflow: "hidden" }}
@@ -62,8 +64,8 @@ const PsyMainContent = () => {
               </Link>
             </li>
             <li style={{ padding: "1em 0em" }}>
-              <Link href={prefix + "/result/stroop"}>
-                <a className="psy-title"> Res </a>
+              <Link href={prefix + "/stroop_effect/result"}>
+                <a className="psy-title"> Result </a>
               </Link>
             </li>
             <li style={{ padding: "1em 0em", display: "none" }}>

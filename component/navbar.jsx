@@ -26,7 +26,7 @@ const NavBar = () => {
             <Link href="/psychology">Psy</Link>
           </li>
           <li>
-            <a href="#">Other services</a>
+            <Link href="/other_services">Other services</Link>
           </li>
         </ul>
       </div>

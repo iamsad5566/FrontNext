@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import PsyGolangService from "../../../api/PsyGolangService";
 import NavBar from "../../../component/navbar";
+import StroopEnd from "../../../component/psyPage/stroopEffect/end";
 import StroopController from "../../../component/psyPage/stroopEffect/stroopController";
 import StroopInstruction from "../../../component/psyPage/stroopEffect/stroopInstruction";
 

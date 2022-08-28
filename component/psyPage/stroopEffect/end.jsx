@@ -1,7 +1,14 @@
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 const StroopEnd = () => {
+  let router = useRouter();
+  const [subject, setSubject] = useState("");
+  useEffect(() => {
+    setSubject(sessionStorage.getItem("subject"));
+  }, []);
+
   const styleForCenter = {
     height: "100vh",
     display: "flex",
@@ -18,15 +25,18 @@ const StroopEnd = () => {
           <span style={{ marginTop: "3em" }}>
             {" "}
             Click here to see your result.{" "}
-            <Link
-              href={`/psychology/stroop_effect/result/${sessionStorage.getItem(
-                "subject"
-              )}`}
+            <button
+              className="btn btn-info"
+              style={{ margin: "2em" }}
+              onClick={() => {
+                router.push({
+                  pathname: `/psychology/stroop_effect/result`,
+                  query: { subject: sessionStorage.getItem("subject") },
+                });
+              }}
             >
-              <button className="btn btn-info" style={{ margin: "2em" }}>
-                結果頁面
-              </button>
-            </Link>
+              結果頁面
+            </button>
           </span>
         </div>
       </div>
