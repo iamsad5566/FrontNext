@@ -12,4 +12,9 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+const isProd = process.env.NODE_ENV === "production";
+
+module.exports = {
+  nextConfig,
+  assetPrefix: isProd ? "https://tw-yk.com" : undefined,
+};
