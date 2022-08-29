@@ -646,7 +646,7 @@ a {
 .wrapper ul {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 45%;
   transform: translate(-50%, -50%);
   list-style: none;
   text-align: center;
@@ -1706,6 +1706,28 @@ header.masthead .post-heading .meta a {
   }
   100% {
     filter: hue-rotate(360deg);
+  }
+}
+
+@media (max-width: 1400px) {
+  .psy-title {
+    text-decoration: none;
+    color: #000;
+    background-color: #ffffff86;
+    border-radius: 50px;
+    padding: 1px 10px;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .psy-title {
+    text-decoration: none;
+    color: #000;
+    background-color: #ffffff86;
+    border-radius: 50px;
+    padding: 1px 10px;
+    line-height: 1;
   }
 }
 

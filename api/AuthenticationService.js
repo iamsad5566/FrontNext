@@ -24,15 +24,6 @@ class AuthenticationService {
     return "Bearer " + token;
   }
 
-  // Setup interceptor
-  // setupAxiosInterceptor(userName) {
-  //   let token = sessionStorage.getItem(userName);
-  //   axios.interceptors.request.use((config) => {
-  //     config.headers.Authorization = token;
-  //     return config;
-  //   });
-  // }
-
   // Return if admin user has logged in
   isLoggedIn() {
     let user = sessionStorage.getItem(this.setting.admin);
