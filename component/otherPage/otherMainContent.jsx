@@ -22,7 +22,7 @@ const OtherMainContent = () => {
     if (width > 1000) {
       setIndent(width * 0.2);
     } else if (width < 768) {
-      setIndent(width * 0.1);
+      setIndent(width * 0.25);
     }
   }, []);
   return (
@@ -42,7 +42,7 @@ const OtherMainContent = () => {
             }}
           >
             <li style={{ padding: "1em 0em" }}>
-              <Link href={prefix + "/chat-room"}>
+              <Link href={prefix + "/chatroom"}>
                 <a className="other-title"> Chat room </a>
               </Link>
             </li>
