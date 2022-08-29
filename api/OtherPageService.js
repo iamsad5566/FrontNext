@@ -14,7 +14,7 @@ class OtherPageService {
 
   postman(account, subject, to, date, subjectName, body) {
     return axios.post(
-      this.address + "sendMail/",
+      this.address + "sendMail",
       {
         from: account,
         subject: subject,
@@ -30,6 +30,7 @@ class OtherPageService {
   gmailRegister(account, password) {
     return axios.post(
       this.address + `gmailRegister?gmail=${account}&appPassword=${password}`,
+      {},
       this.config
     );
   }
@@ -37,11 +38,13 @@ class OtherPageService {
   checkGmail(account) {
     return axios.post(
       this.address + `gmailCheck?gmail=${account}`,
+      {},
       this.config
     );
   }
 
   sendTemplate(key, body) {
+    console.log(this.config);
     return axios.post(
       this.address + "saveTemplate",
       {
@@ -59,6 +62,7 @@ class OtherPageService {
   deleteTemplate(id) {
     return axios.post(
       this.address + `deleteTemplateById?id=${id}`,
+      {},
       this.config
     );
   }

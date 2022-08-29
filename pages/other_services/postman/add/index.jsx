@@ -1,13 +1,13 @@
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import NavBar from "../../../component/navbar";
-import Postman from "../../../component/otherPage/postman/postman";
+import NavBar from "../../../../component/navbar";
+import NewTemplate from "../../../../component/otherPage/postman/newTemplate";
 
-const PostmanInterface = () => {
+const AddInterface = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Postman</title>
+        <title>New template</title>
         <meta
           property="og:url"
           content="https://tw-yk.com/other_services/postman"
@@ -25,9 +25,9 @@ const PostmanInterface = () => {
         <script src="https://kit.fontawesome.com/a076d05399.js" async />
       </Helmet>
       <NavBar />
-      <Postman />
+      <NewTemplate />
     </HelmetProvider>
   );
 };
 
-export default PostmanInterface;
+export default AddInterface;

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const FirstTimeVisit = () => {
@@ -5,7 +6,7 @@ const FirstTimeVisit = () => {
     "Since Google has chaged the privacy policies, if it is your first time using this APP, please register your Gmail on this website first so that the APP can be authorized to log in your google account with an App password. You can finish your registration by clicking the button below and following the instruction then.";
 
   const styleForAttentionBox = {
-    marginTop: "7em",
+    marginTop: "2em",
     textAlign: "center",
   };
 

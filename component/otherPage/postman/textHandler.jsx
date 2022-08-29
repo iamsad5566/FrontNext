@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
+import Setting from "../../../../setting";
 import AuthenticationService from "../../../api/AuthenticationService";
+import OtherPageService from "../../../api/OtherPageService";
 
 const TextHandler = (props) => {
   let template = "";
   let index = 0;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let authenticationService = new AuthenticationService();
+  let setting = new Setting();
+  let otherPageService = new OtherPageService();
 
   if (props.text !== undefined) {
     template = props.text;
@@ -19,7 +23,8 @@ const TextHandler = (props) => {
   }, []);
 
   const handleDelete = () => {
-    manipulateData.deleteTemplate(index);
+    otherPageService.saveToken(sessionStorage.getItem(setting.admin));
+    otherPageService.deleteTemplate(index);
     setTimeout(() => {
       window.location.reload();
     }, 500);

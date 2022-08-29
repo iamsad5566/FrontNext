@@ -1,7 +1,11 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Setting from "../../../../setting";
 import AuthenticationService from "../../../api/AuthenticationService";
 import OtherPageService from "../../../api/OtherPageService";
+import FirstTimeVisit from "./firstTimeVisit";
+import PostmanManager from "./postmanManager";
+import TextHandler from "./textHandler";
 
 const Postman = () => {
   const [template, setTemplate] = useState("");
@@ -52,12 +56,20 @@ const Postman = () => {
         getData();
       });
     }
-  }, [remoteTemplate]);
+  }, []);
 
   return (
     <React.Fragment>
       <FirstTimeVisit />
-      <div className="container" style={{ marginTop: "4em" }}>
+      <div
+        className="container"
+        style={{
+          marginTop: "1em",
+          marginBottom: "3em",
+          height: "auto",
+          fontSize: "1.2em",
+        }}
+      >
         <div className="row justify-content-md-center">
           <div
             className="col col-lg-4"
@@ -139,7 +151,7 @@ const Postman = () => {
             <div style={{ marginTop: "2em" }}>
               <span> Press </span>
               <Link
-                to="add"
+                href="/other_services/postman/add"
                 style={{
                   fontWeight: "bold",
                   backgroundColor: "black",
