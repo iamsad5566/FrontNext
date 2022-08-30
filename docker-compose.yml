@@ -1,0 +1,18 @@
+version: "3.6"
+services:
+  nginx_next:
+    image: "nginx:latest"
+    container_name: "nginx_psy"
+    ports:
+      - "45678:45678"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - ykweb
+
+  ykweb:
+    build: .
+    container_name: ykService
+    ports:
+      - "3000:3000"
+    restart: always

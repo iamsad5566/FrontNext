@@ -1709,6 +1709,28 @@ header.masthead .post-heading .meta a {
   }
 }
 
+@media (max-width: 1400px) {
+  .psy-title {
+    text-decoration: none;
+    color: #000;
+    background-color: #ffffff86;
+    border-radius: 50px;
+    padding: 1px 10px;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .psy-title {
+    text-decoration: none;
+    color: #000;
+    background-color: #ffffff86;
+    border-radius: 50px;
+    padding: 1px 10px;
+    line-height: 1;
+  }
+}
+
 /*  */
 
 /* Other service */

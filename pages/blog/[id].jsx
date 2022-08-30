@@ -7,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 import AuthenticationService from "../../api/AuthenticationService";
 import BlogService from "../../api/BlogService";
 import Setting from "../../../setting";
+
 const Post = () => {
   const [article, setArticle] = useState({
     title: "",
