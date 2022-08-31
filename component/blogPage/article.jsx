@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Setting from "../../../setting";
@@ -11,7 +10,6 @@ const Article = (props) => {
   const [articleTodayBrowse, setArticleTodayBrowse] = useState(0);
   const [articleAllBrowse, setArticleAllBrowse] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
-  const router = useRouter();
 
   let setting = new Setting();
   let blogService = new BlogService();
@@ -42,28 +40,21 @@ const Article = (props) => {
   return (
     <React.Fragment>
       <div className="post-preview" style={{ margin: "2em 0em" }}>
-        <span
-          id="articleContainer"
-          onClick={() => {
-            console.log(postId);
-            router.push({
-              pathname: `/blog/${postId}`,
-              query: { title: title },
-            });
-          }}
-        >
-          <h1 className="post-title">{title}</h1>
-          <span
-            className="post-subtitle"
-            style={{
-              marginTop: "1.5em",
-              lineHeight: 2,
-              textAlign: "justify",
-            }}
-          >
-            <ReactMarkdown>{content}</ReactMarkdown>
+        <Link href={`/blog/${postId}`}>
+          <span id="articleContainer">
+            <h1 className="post-title">{title}</h1>
+            <span
+              className="post-subtitle"
+              style={{
+                marginTop: "1.5em",
+                lineHeight: 2,
+                textAlign: "justify",
+              }}
+            >
+              <ReactMarkdown>{content}</ReactMarkdown>
+            </span>
           </span>
-        </span>
+        </Link>
 
         <p className="post-meta" style={{ marginTop: "2em" }}>
           Posted by
