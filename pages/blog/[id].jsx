@@ -4,22 +4,25 @@ import NavBar from "../../component/navbar";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import AuthenticationService from "../../api/AuthenticationService";
-import BlogService from "../../api/BlogService";
-import Setting from "../../../setting";
 import Head from "next/head";
+import { getPostData } from "../../component/blogPage/mainContent";
 
-const Post = () => {
-  const [article, setArticle] = useState({
-    title: "",
-    content: "",
-    date: "",
-  });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [postID, setpostID] = useState(0);
-  let authenticationService = new AuthenticationService();
-  let blogService = new BlogService();
-  let setting = new Setting();
+const Post = (props) => {
   let router = useRouter();
+  let id;
+  let title;
+  let content;
+  let date;
+  if (!router.isFallback) {
+    id = props.params.id;
+    title = props.article.title;
+    content = props.article.content;
+    date = props.article.date;
+  }
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let authenticationService = new AuthenticationService();
+
   const dealWithATag = () => {
     let aList = document.getElementsByTagName("a");
     for (let i = 0; i < aList.length; i++) {
@@ -30,26 +33,8 @@ const Post = () => {
 
   useEffect(() => {
     dealWithATag();
-    let urlArr = document.baseURI.split("/");
-    let tmpID = urlArr[urlArr.length - 1] || urlArr[urlArr.length - 2];
-    setpostID(tmpID);
-
     if (authenticationService.isLoggedIn()) {
       setIsLoggedIn(true);
-      blogService.saveToken(sessionStorage.getItem(setting.admin));
-      blogService.getSingleArticle(tmpID).then((response) => {
-        let tmpData = response.data;
-        setArticle(tmpData);
-      });
-    } else {
-      authenticationService.login("guest", "guest").then((response) => {
-        authenticationService.registerLogin("guest", response.data.token);
-        blogService.saveToken(sessionStorage.getItem("guest"));
-        blogService.getSingleArticle(tmpID).then((response) => {
-          let tmpData = response.data;
-          setArticle(tmpData);
-        });
-      });
     }
   }, []);
 
@@ -66,19 +51,23 @@ const Post = () => {
     width: "60%",
     marginTop: "2em",
   };
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <React.Fragment>
       <Head>
-        <title>{article.title}</title>
-        <meta property="og:url" content={`https://tw-yk.com/blog/${postID}`} />
+        <title>{title}</title>
+        <meta property="og:url" content={`https://tw-yk.com/blog/${id}`} />
         <meta property="og:locale" content="zh_TW" />
-        <meta property="og:description" content={article.content} />
-        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={title} />
+        <meta property="og:title" content={title} />
         <meta property="og:type" content="article" />
         <meta property="fb:admins" content="153906327962277" />
-        <meta property="og:image" content="https://tw-yk.com/book.jpg" />
+        <meta property="og:image" content="https://tw-yk.com/book.png" />
         <link rel="icon" href="/chick.ico" type="image/x-icon" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" async />
       </Head>
       <NavBar />
       <header className="masthead" style={styleForBackgroundImage}>
@@ -99,10 +88,10 @@ const Post = () => {
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div className="col-md-10 col-lg-8 col-xl-7">
               <div className="post-heading">
-                <h1>{article.title}</h1>
+                <h1>{title}</h1>
                 <span className="meta" style={styleForPostInfo}>
                   Posted by {"Yen-Kuang "}
-                  on {article.date}
+                  on {date}
                 </span>
               </div>
             </div>
@@ -114,7 +103,7 @@ const Post = () => {
         <div className="container px-4 px-lg-5">
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div className="col-md-10 col-lg-8 col-xl-10">
-              <ReactMarkdown>{article.content}</ReactMarkdown>
+              <ReactMarkdown>{content}</ReactMarkdown>
 
               <div style={{ textAlign: "center" }}>
                 {isLoggedIn ? (
@@ -124,7 +113,7 @@ const Post = () => {
                       router.push({
                         pathname: "/blog/update",
                         query: {
-                          postID: postID,
+                          postID: id,
                         },
                       });
                     }}
@@ -145,3 +134,38 @@ const Post = () => {
 };
 
 export default Post;
+
+export const getStaticPaths = () => {
+  let idArr = [
+    "12",
+    "13",
+    "15",
+    "16",
+    "17",
+    "18",
+    "20",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "29",
+  ];
+  return {
+    paths: idArr.map((m) => {
+      return { params: { id: m } };
+    }),
+    fallback: true,
+  };
+};
+
+export async function getStaticProps({ params }) {
+  const article = await getPostData(params.id);
+  return {
+    props: {
+      params,
+      article,
+    },
+  };
+}

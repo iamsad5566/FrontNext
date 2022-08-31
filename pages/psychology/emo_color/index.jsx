@@ -20,7 +20,6 @@ const EmoColorInterface = () => {
         <meta property="og:type" content="website" />
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/pi512.png" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" async />
         <link rel="icon" href="/psy.ico" type="image/x-icon" />
       </Head>
       <EmpColorEntry />
