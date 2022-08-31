@@ -63,20 +63,10 @@ const BlogInterface = () => {
     document.cookie = "SameSite=Lax; Secure";
   }, [postCategory]);
 
-  const styleForBrowseTimes = {
-    top: "10em",
-    textAlign: "center",
-  };
-
-  const styleForCategory = {
-    margin: "5em",
-    textAlign: "center",
-  };
-
   return (
     <React.Fragment>
       <BlogHeader />
-      <div style={styleForCategory}>
+      <div id="blogArticleContainer">
         <h2 style={{ display: "inline", fontSize: "1.5em" }}>Category:</h2>
         <select
           style={{ marginLeft: "1em" }}

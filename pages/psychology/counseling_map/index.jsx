@@ -1,13 +1,13 @@
+import Head from "next/head";
 import React from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { HelmetProvider } from "react-helmet-async";
 import NavBar from "../../../component/navbar";
 import TaiwanMap from "../../../component/psyPage/counselingMap/twMap";
-import * as d3 from "d3";
 
 const CounselingInterface = () => {
   return (
     <HelmetProvider>
-      <Helmet>
+      <Head>
         <title>Counselling resource</title>
         <meta
           property="og:url"
@@ -24,7 +24,7 @@ const CounselingInterface = () => {
         <meta property="og:image" content="https://tw-yk.com/pi512.png" />
         <script src="https://kit.fontawesome.com/a076d05399.js" async />
         <link rel="icon" href="/psy.ico" type="image/x-icon" />
-      </Helmet>
+      </Head>
       <NavBar />
       <TaiwanMap />
     </HelmetProvider>

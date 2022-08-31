@@ -1,12 +1,12 @@
+import Head from "next/head";
 import React from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import NavBar from "../../../component/navbar";
 import ChatRoom from "../../../component/otherPage/chatRoom/chatRoom";
 
 const ChatroomInterface = () => {
   return (
-    <HelmetProvider>
-      <Helmet>
+    <React.Fragment>
+      <Head>
         <title>Chat room</title>
         <meta
           property="og:url"
@@ -23,10 +23,10 @@ const ChatroomInterface = () => {
         <meta property="og:image" content="https://tw-yk.com/pi512.png" />
         <link rel="icon" href="/chat.ico" type="image/x-icon" />
         <script src="https://kit.fontawesome.com/a076d05399.js" async />
-      </Helmet>
+      </Head>
       <NavBar />
       <ChatRoom />
-    </HelmetProvider>
+    </React.Fragment>
   );
 };
 
