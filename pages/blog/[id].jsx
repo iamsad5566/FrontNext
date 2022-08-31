@@ -76,7 +76,7 @@ const Post = () => {
         <meta property="og:title" content={article.title} />
         <meta property="og:type" content="article" />
         <meta property="fb:admins" content="153906327962277" />
-        <meta property="og:image" content="https://tw-yk.com/book.jpg" />
+        <meta property="og:image" content="https://tw-yk.com/book.png" />
         <link rel="icon" href="/chick.ico" type="image/x-icon" />
         <script src="https://kit.fontawesome.com/a076d05399.js" async />
       </Head>
