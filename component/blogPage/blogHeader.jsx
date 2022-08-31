@@ -2,7 +2,7 @@ import React from "react";
 
 const BlogHeader = () => {
   const styleForBackgroundImage = {
-    backgroundImage: `url("https://tw-yk.com/background.jpg")`,
+    backgroundImage: `url("background.jpg")`,
   };
 
   const styleForHeading = {

@@ -1,8 +1,7 @@
+import Head from "next/head";
 import React, { useState } from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import PsyGolangService from "../../../api/PsyGolangService";
 import NavBar from "../../../component/navbar";
-import StroopEnd from "../../../component/psyPage/stroopEffect/end";
 import StroopController from "../../../component/psyPage/stroopEffect/stroopController";
 import StroopInstruction from "../../../component/psyPage/stroopEffect/stroopInstruction";
 
@@ -56,8 +55,8 @@ const StroopInteface = () => {
   };
 
   return (
-    <HelmetProvider>
-      <Helmet>
+    <React.Fragment>
+      <Head>
         <title>Stroop effect exp</title>
         <meta
           property="og:url"
@@ -74,7 +73,7 @@ const StroopInteface = () => {
         <meta property="og:image" content="https://tw-yk.com/stroop.jpg" />
         <script src="https://kit.fontawesome.com/a076d05399.js" async />
         <link rel="icon" href="/psy.ico" type="image/x-icon" />
-      </Helmet>
+      </Head>
       {confirm ? (
         <StroopController name={information.name} />
       ) : (
@@ -87,7 +86,7 @@ const StroopInteface = () => {
           />
         </React.Fragment>
       )}
-    </HelmetProvider>
+    </React.Fragment>
   );
 };
 

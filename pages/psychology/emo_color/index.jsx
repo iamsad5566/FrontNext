@@ -1,11 +1,11 @@
+import Head from "next/head";
 import React from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import EmpColorEntry from "../../../component/psyPage/emotionColor/empColorEntry";
 
 const EmoColorInterface = () => {
   return (
-    <HelmetProvider>
-      <Helmet>
+    <React.Fragment>
+      <Head>
         <title>Emotion x color</title>
         <meta
           property="og:url"
@@ -22,9 +22,9 @@ const EmoColorInterface = () => {
         <meta property="og:image" content="https://tw-yk.com/pi512.png" />
         <script src="https://kit.fontawesome.com/a076d05399.js" async />
         <link rel="icon" href="/psy.ico" type="image/x-icon" />
-      </Helmet>
+      </Head>
       <EmpColorEntry />
-    </HelmetProvider>
+    </React.Fragment>
   );
 };
 

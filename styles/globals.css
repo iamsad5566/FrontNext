@@ -1789,6 +1789,11 @@ header.masthead .post-heading .meta a {
   margin-left: auto;
 }
 
+#blogArticleContainer {
+  margin: 5em;
+  text-align: center;
+}
+
 @media (min-width: 576px) {
   .container-sm,
   .container {
@@ -3359,6 +3364,10 @@ header.masthead .post-heading .meta a {
 
   #cover {
     height: auto;
+  }
+
+  #blogArticleContainer {
+    margin: 1.5em;
   }
 }
 
