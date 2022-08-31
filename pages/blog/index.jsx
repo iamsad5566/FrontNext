@@ -16,7 +16,6 @@ const Blog = () => {
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/blog.jpg" />
         <link rel="icon" href="/chick.ico" type="image/x-icon" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" async />
       </Head>
       <NavBar />
       <BlogInterface />

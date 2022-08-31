@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter, withRouter } from "next/router";
 import NavBar from "../../component/navbar";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -8,14 +8,14 @@ import BlogService from "../../api/BlogService";
 import Setting from "../../../setting";
 import Head from "next/head";
 
-const Post = () => {
+const Post = (props) => {
   const [article, setArticle] = useState({
-    title: "",
+    title: props.router.query.title,
     content: "",
     date: "",
   });
+  console.log(props.router);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [postID, setpostID] = useState(0);
   let authenticationService = new AuthenticationService();
   let blogService = new BlogService();
   let setting = new Setting();
@@ -30,28 +30,27 @@ const Post = () => {
 
   useEffect(() => {
     dealWithATag();
-    let urlArr = document.baseURI.split("/");
-    let tmpID = urlArr[urlArr.length - 1] || urlArr[urlArr.length - 2];
-    setpostID(tmpID);
-
-    if (authenticationService.isLoggedIn()) {
-      setIsLoggedIn(true);
-      blogService.saveToken(sessionStorage.getItem(setting.admin));
-      blogService.getSingleArticle(tmpID).then((response) => {
-        let tmpData = response.data;
-        setArticle(tmpData);
-      });
-    } else {
-      authenticationService.login("guest", "guest").then((response) => {
-        authenticationService.registerLogin("guest", response.data.token);
-        blogService.saveToken(sessionStorage.getItem("guest"));
-        blogService.getSingleArticle(tmpID).then((response) => {
+    if (props.router.query.id !== undefined) {
+      let postID = props.router.query.id;
+      if (authenticationService.isLoggedIn()) {
+        setIsLoggedIn(true);
+        blogService.saveToken(sessionStorage.getItem(setting.admin));
+        blogService.getSingleArticle(postID).then((response) => {
           let tmpData = response.data;
           setArticle(tmpData);
         });
-      });
+      } else {
+        authenticationService.login("guest", "guest").then((response) => {
+          authenticationService.registerLogin("guest", response.data.token);
+          blogService.saveToken(sessionStorage.getItem("guest"));
+          blogService.getSingleArticle(postID).then((response) => {
+            let tmpData = response.data;
+            setArticle(tmpData);
+          });
+        });
+      }
     }
-  }, []);
+  }, [props]);
 
   const styleForBackgroundImage = {
     backgroundImage: `url("https://tw-yk.com/1.jpeg")`,
@@ -70,15 +69,17 @@ const Post = () => {
     <React.Fragment>
       <Head>
         <title>{article.title}</title>
-        <meta property="og:url" content={`https://tw-yk.com/blog/${postID}`} />
+        <meta
+          property="og:url"
+          content={`https://tw-yk.com/blog/article?id=${props.router.query.id}&title=${props.router.query.title}`}
+        />
         <meta property="og:locale" content="zh_TW" />
-        <meta property="og:description" content={article.content} />
-        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={props.router.query.title} />
+        <meta property="og:title" content={props.router.query.title} />
         <meta property="og:type" content="article" />
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/book.png" />
         <link rel="icon" href="/chick.ico" type="image/x-icon" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" async />
       </Head>
       <NavBar />
       <header className="masthead" style={styleForBackgroundImage}>
@@ -144,4 +145,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default withRouter(Post);

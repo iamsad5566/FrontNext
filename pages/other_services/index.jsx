@@ -19,7 +19,6 @@ const OtherServiceInterface = () => {
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/pi512.png" />
         <link rel="icon" href="/bulb.ico" type="image/x-icon" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" async />
       </Head>
 
       <NavBar />

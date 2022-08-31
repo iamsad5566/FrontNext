@@ -42,21 +42,28 @@ const Article = (props) => {
   return (
     <React.Fragment>
       <div className="post-preview" style={{ margin: "2em 0em" }}>
-        <Link href={`/blog/${postId}`}>
-          <span id="articleContainer">
-            <h1 className="post-title">{title}</h1>
-            <span
-              className="post-subtitle"
-              style={{
-                marginTop: "1.5em",
-                lineHeight: 2,
-                textAlign: "justify",
-              }}
-            >
-              <ReactMarkdown>{content}</ReactMarkdown>
-            </span>
+        <span
+          id="articleContainer"
+          onClick={() => {
+            console.log(postId);
+            router.push({
+              pathname: `/blog/${postId}`,
+              query: { title: title },
+            });
+          }}
+        >
+          <h1 className="post-title">{title}</h1>
+          <span
+            className="post-subtitle"
+            style={{
+              marginTop: "1.5em",
+              lineHeight: 2,
+              textAlign: "justify",
+            }}
+          >
+            <ReactMarkdown>{content}</ReactMarkdown>
           </span>
-        </Link>
+        </span>
 
         <p className="post-meta" style={{ marginTop: "2em" }}>
           Posted by

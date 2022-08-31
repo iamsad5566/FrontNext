@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 import React from "react";
 
 const NavBar = () => {
@@ -8,6 +9,7 @@ const NavBar = () => {
 
   return (
     <React.Fragment>
+      <Script src="https://kit.fontawesome.com/a076d05399.js" />
       <input type="checkbox" id="active"></input>
       <label htmlFor="active" className="menu-btn">
         <i className="fas fa-bars" id="menuBar"></i>
