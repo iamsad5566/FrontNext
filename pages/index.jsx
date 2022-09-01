@@ -103,14 +103,6 @@ const Home = () => {
         <meta property="og:type" content="website" />
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/2.jpeg" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <NavBar />
 
