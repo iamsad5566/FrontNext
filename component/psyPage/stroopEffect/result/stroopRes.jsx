@@ -29,7 +29,7 @@ const StroopRes = () => {
 
   if (document !== null && document.scrollingElement.clientWidth <= 700) {
     height = "140vh";
-    marginTop = "5em";
+    marginTop = "10em";
   }
 
   const pieChange = (con) => {
@@ -128,6 +128,7 @@ const StroopRes = () => {
 
   return (
     <React.Fragment>
+      <div style={{ marginTop: marginTop }}></div>
       <div style={styleForMiddle}>
         <div className="container text-center">
           <div

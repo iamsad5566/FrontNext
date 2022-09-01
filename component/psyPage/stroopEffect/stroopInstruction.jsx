@@ -11,9 +11,9 @@ const StroopInstruction = (props) => {
   const [resize, setResize] = useState(0);
 
   useEffect(() => {
-    if (document.scrollingElement.clientWidth < 480) {
+    if (document.scrollingElement.clientWidth < 600) {
       setWidth("90%");
-      setHeight("auto");
+      setHeight("100%");
     } else {
       setWidth("60%");
       setHeight("auto");

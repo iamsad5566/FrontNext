@@ -104,7 +104,7 @@ const MainContent = (props) => {
                     key={id++}
                     postId={article.postId}
                     title={article.title}
-                    content={article.content}
+                    content={article.content.substring(0, 200)}
                     date={article.date}
                   />
                 ))
