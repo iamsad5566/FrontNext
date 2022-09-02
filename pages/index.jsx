@@ -102,7 +102,7 @@ const Home = () => {
         <meta property="og:title" content="彥匡ㄉ家" />
         <meta property="og:type" content="website" />
         <meta property="fb:admins" content="153906327962277" />
-        <meta property="og:image" content="https://tw-yk.com/2.jpeg" />
+        <meta property="og:image" content="https://tw-yk.com/homeHead.png" />
       </Head>
       <NavBar />
 
