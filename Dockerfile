@@ -14,6 +14,7 @@ FROM node:lts as runner
 WORKDIR /yk-web/src
 ENV NODE_ENV production
 # If you are using a custom next.config.js file, uncomment this line.
+COPY ./setting.js /yk-web/
 COPY --from=builder /yk-web/src/next.config.js ./
 COPY --from=builder /yk-web/src/public ./public
 COPY --from=builder /yk-web/src/.next ./.next
@@ -21,4 +22,4 @@ COPY --from=builder /yk-web/src/node_modules ./node_modules
 COPY --from=builder /yk-web/src/package.json ./package.json
 
 EXPOSE 3000
-CMD ["node", "server.js"]
+CMD ["yarn", "start"]
