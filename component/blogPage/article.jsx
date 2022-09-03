@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Setting from "../../../setting";
@@ -11,7 +10,6 @@ const Article = (props) => {
   const [articleTodayBrowse, setArticleTodayBrowse] = useState(0);
   const [articleAllBrowse, setArticleAllBrowse] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
-  const router = useRouter();
 
   let setting = new Setting();
   let blogService = new BlogService();

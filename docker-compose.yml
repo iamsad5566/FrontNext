@@ -2,17 +2,20 @@ version: "3.6"
 services:
   nginx_next:
     image: "nginx:latest"
-    container_name: "nginx_psy"
+    container_name: "nginx_ykweb"
     ports:
-      - "45678:45678"
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - /root/cert:/etc/nginx/cert
+      - /root/conf.d:/etc/nginx/conf.d
     depends_on:
       - ykweb
 
   ykweb:
     build: .
     container_name: ykService
-    ports:
-      - "3000:3000"
+    volumes:
+      - /root/cert:/yk-web/cert
+      - /root/yk-web/server.js:/yk-web/src/server.js
     restart: always

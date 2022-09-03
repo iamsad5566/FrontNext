@@ -1,12 +1,12 @@
+import Head from "next/head";
 import React from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import NavBar from "../../../../component/navbar";
 import NewTemplate from "../../../../component/otherPage/postman/newTemplate";
 
 const AddInterface = () => {
   return (
-    <HelmetProvider>
-      <Helmet>
+    <React.Fragment>
+      <Head>
         <title>New template</title>
         <meta
           property="og:url"
@@ -22,11 +22,10 @@ const AddInterface = () => {
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/hermes.png" />
         <link rel="icon" href="/mailCat.ico" type="image/x-icon" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" async />
-      </Helmet>
+      </Head>
       <NavBar />
       <NewTemplate />
-    </HelmetProvider>
+    </React.Fragment>
   );
 };
 

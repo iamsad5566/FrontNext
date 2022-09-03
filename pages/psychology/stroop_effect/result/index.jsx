@@ -1,6 +1,6 @@
+import Head from "next/head";
 import { withRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import NavBar from "../../../../component/navbar";
 import ResControl from "../../../../component/psyPage/stroopEffect/result/resControl";
 import StroopRes from "../../../../component/psyPage/stroopEffect/result/stroopRes";
@@ -12,8 +12,8 @@ const StroopResInterface = (props) => {
   }, [props]);
 
   return (
-    <HelmetProvider>
-      <Helmet>
+    <React.Fragment>
+      <Head>
         <title>Stroop result</title>
         <meta
           property="og:url"
@@ -31,12 +31,11 @@ const StroopResInterface = (props) => {
         <meta property="og:type" content="website" />
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/stroop.jpg" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" async />
         <link rel="icon" href="/psy.ico" type="image/x-icon" />
-      </Helmet>
+      </Head>
       <NavBar />
       {query.subject == undefined ? <ResControl /> : <StroopRes />}
-    </HelmetProvider>
+    </React.Fragment>
   );
 };
 

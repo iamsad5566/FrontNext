@@ -8,10 +8,10 @@ import Cover from "../component/homePage/cover";
 import NavBar from "../component/navbar";
 import IntroManager from "../component/homePage/introManager";
 import Intro from "../component/homePage/intro";
-import { HelmetProvider, Helmet } from "react-helmet-async";
 import TableInterface from "../component/homePage/tableComponent/tableInterface";
 import Works from "../component/homePage/works";
 import Link from "next/dist/client/link";
+import Head from "next/head";
 
 const Home = () => {
   const [loginButton, setLoginButton] = useState("Login if you are yk");
@@ -88,8 +88,8 @@ const Home = () => {
 
   let style = new StyleComponent();
   return (
-    <HelmetProvider>
-      <Helmet>
+    <React.Fragment>
+      <Head>
         <title>Yen-Kuang Chen</title>
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/gorilla.jpg" type="image/x-icon" />
@@ -102,17 +102,8 @@ const Home = () => {
         <meta property="og:title" content="彥匡ㄉ家" />
         <meta property="og:type" content="website" />
         <meta property="fb:admins" content="153906327962277" />
-        <meta property="og:image" content="https://tw-yk.com/2.jpeg" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
-          rel="stylesheet"
-        />
-        <script src="https://kit.fontawesome.com/a076d05399.js" async />
-      </Helmet>
+        <meta property="og:image" content="https://tw-yk.com/homeHead.png" />
+      </Head>
       <NavBar />
 
       <div className="container-fluid" style={style.styleForContainer}>
@@ -336,7 +327,7 @@ const Home = () => {
           </ul>
         </footer>
       </div>
-    </HelmetProvider>
+    </React.Fragment>
   );
 };
 

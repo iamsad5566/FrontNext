@@ -11,9 +11,9 @@ const StroopInstruction = (props) => {
   const [resize, setResize] = useState(0);
 
   useEffect(() => {
-    if (document.scrollingElement.clientWidth < 480) {
+    if (document.scrollingElement.clientWidth < 600) {
       setWidth("90%");
-      setHeight("auto");
+      setHeight("100%");
     } else {
       setWidth("60%");
       setHeight("auto");
@@ -62,7 +62,7 @@ const StroopInstruction = (props) => {
               {" "}
               Before the experiment begin, please provide your name and some of
               the basic information. All these record will be well protected and
-              only used for research pupose, make sure you are agree with this,
+              only used for research purpose, make sure you are agree with this,
               and fill in the rows below.
             </span>
             <div style={{ marginTop: "2em", textAlign: "right" }}>

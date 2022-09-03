@@ -21,4 +21,4 @@ COPY --from=builder /yk-web/src/node_modules ./node_modules
 COPY --from=builder /yk-web/src/package.json ./package.json
 
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["node", "server.js"]

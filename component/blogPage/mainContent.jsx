@@ -104,7 +104,7 @@ const MainContent = (props) => {
                     key={id++}
                     postId={article.postId}
                     title={article.title}
-                    content={article.content}
+                    content={article.content.substring(0, 200)}
                     date={article.date}
                   />
                 ))
@@ -127,3 +127,21 @@ const MainContent = (props) => {
 };
 
 export default MainContent;
+
+export async function getPostData(id) {
+  let authenticationService = new AuthenticationService();
+  let token = "";
+  await authenticationService.login("guest", "guest").then((response) => {
+    token = authenticationService.createToken(response.data.token);
+  });
+
+  const res = await fetch(
+    `https://tw-yk.website:81/article/getSingleArticle/${id}`,
+    {
+      headers: { Authorization: token },
+    }
+  );
+
+  const article = await res.json();
+  return article;
+}
