@@ -37,6 +37,11 @@ const Home = () => {
     }
   };
 
+  const getPasswordFromCookie = () => {
+    let separator = setting.admin + "=";
+    let password = document.cookie(separator)[1];
+  };
+
   const handleDeleteWork = (title) => {
     if (window.confirm("Are you sure to delete this?")) {
       homePageService.saveToken(sessionStorage.getItem(setting.admin));
@@ -68,6 +73,13 @@ const Home = () => {
       });
       setLoading(false);
     };
+
+    if (document.cookie.includes(setting.admin)) {
+      let password = getPasswordFromCookie();
+      authenticationService.login(setting.admin, password).then((response) => {
+        authenticationService.registerLogin(setting.admin, response.data.token);
+      });
+    }
 
     if (!authenticationService.isLoggedIn()) {
       authenticationService
