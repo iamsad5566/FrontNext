@@ -39,7 +39,8 @@ const Home = () => {
 
   const getPasswordFromCookie = () => {
     let separator = setting.admin + "=";
-    let password = document.cookie(separator)[1];
+    let password = document.cookie.split(separator)[1];
+    return password;
   };
 
   const handleDeleteWork = (title) => {
@@ -78,6 +79,7 @@ const Home = () => {
       let password = getPasswordFromCookie();
       authenticationService.login(setting.admin, password).then((response) => {
         authenticationService.registerLogin(setting.admin, response.data.token);
+        setLoggedIn(true);
       });
     }
 
