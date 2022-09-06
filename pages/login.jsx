@@ -40,8 +40,8 @@ const Login = () => {
           info.userName +
           "=" +
           info.password +
-          ";expires" +
-          expire.toUTCString +
+          ";expires=" +
+          expire.toUTCString() +
           ";path=/";
         setShowMessage(true);
       })
