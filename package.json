@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "upload": "rsync -avP * root@128.199.200.209:yk-web"
+    "upload": "rsync -avP ../yk-web root@128.199.200.209:~"
   },
   "dependencies": {
     "axios": "^0.27.2",

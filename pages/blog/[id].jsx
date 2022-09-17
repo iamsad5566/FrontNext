@@ -6,6 +6,8 @@ import ReactMarkdown from "react-markdown";
 import AuthenticationService from "../../api/AuthenticationService";
 import Head from "next/head";
 import { getPostData } from "../../component/blogPage/mainContent";
+import BlogService from "../../api/BlogService";
+import Setting from "../../../setting";
 
 const Post = (props) => {
   let router = useRouter();
@@ -21,7 +23,10 @@ const Post = (props) => {
   }
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [updateContent, setUpdateContent] = useState("");
   let authenticationService = new AuthenticationService();
+  let blogService = new BlogService();
+  let setting = new Setting();
 
   const dealWithATag = () => {
     let aList = document.getElementsByTagName("a");
@@ -35,6 +40,17 @@ const Post = (props) => {
     dealWithATag();
     if (authenticationService.isLoggedIn()) {
       setIsLoggedIn(true);
+      blogService.saveToken(sessionStorage.getItem(setting.admin));
+      blogService.getSingleArticle(id).then((response) => {
+        setUpdateContent(response.data.content);
+      });
+    } else {
+      authenticationService.login("guest", "guest").then((response) => {
+        blogService.saveToken(authenticationService.createToken(response));
+        blogService.getSingleArticle(id).then((res) => {
+          setUpdateContent(res.data.content);
+        });
+      });
     }
   }, []);
 
@@ -62,7 +78,7 @@ const Post = (props) => {
         <title>{title}</title>
         <meta property="og:url" content={`https://tw-yk.com/blog/${id}`} />
         <meta property="og:locale" content="zh_TW" />
-        <meta property="og:description" content={title} />
+        <meta property="og:description" content={content} />
         <meta property="og:title" content={title} />
         <meta property="og:type" content="article" />
         <meta property="fb:admins" content="153906327962277" />
@@ -103,7 +119,7 @@ const Post = (props) => {
         <div className="container px-4 px-lg-5">
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div className="col-md-10 col-lg-8 col-xl-10">
-              <ReactMarkdown>{content}</ReactMarkdown>
+              <ReactMarkdown>{updateContent}</ReactMarkdown>
 
               <div style={{ textAlign: "center" }}>
                 {isLoggedIn ? (
