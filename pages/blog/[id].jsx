@@ -46,7 +46,9 @@ const Post = (props) => {
       });
     } else {
       authenticationService.login("guest", "guest").then((response) => {
-        blogService.saveToken(authenticationService.createToken(response));
+        blogService.saveToken(
+          authenticationService.createToken(response.data.token)
+        );
         blogService.getSingleArticle(id).then((res) => {
           setUpdateContent(res.data.content);
         });
