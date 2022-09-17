@@ -24,6 +24,7 @@
     "react-helmet-async": "^1.3.0",
     "react-markdown": "^8.0.3",
     "react-mde": "^11.5.0",
+    "rehype-raw": "^6.1.1",
     "showdown": "^2.1.0",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
