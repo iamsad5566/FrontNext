@@ -984,8 +984,9 @@ input[type="checkbox"] {
 }
 
 #worksContainer {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 #journalLink {
