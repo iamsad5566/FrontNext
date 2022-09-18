@@ -63,6 +63,17 @@ const Home = () => {
     setTimeout(() => window.location.reload(), 100);
   };
 
+  const styleForWorkFullCover = {
+    position: "relative",
+    display: "flex",
+    alignItem: "center",
+    textAlign: "center",
+    height: "100vh",
+    margin: "auto",
+    overflowX: "scroll",
+    overflowY: "scroll",
+  };
+
   useEffect(() => {
     const getData = () => {
       homePageService.getWorks().then((response) => {
@@ -181,12 +192,8 @@ const Home = () => {
           </div>
         </div>
 
-        <div
-          className="row"
-          id="worksContainer"
-          style={style.styleForWorkFullCover}
-        >
-          <div style={style.styleForWorks}>
+        <div className="row" id="worksContainer" style={styleForWorkFullCover}>
+          <div style={{ marginTop: "5vh" }}>
             <h1>My works</h1>
             {!hasLoggedIn ? (
               <></>

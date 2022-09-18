@@ -11,21 +11,6 @@ class StyleComponent {
     justifyContent: "center",
   };
 
-  styleForWorks = {
-    marginTop: "10vh",
-  };
-
-  styleForWorkFullCover = {
-    position: "relative",
-    display: "flex",
-    alignItem: "center",
-    textAlign: "center",
-    height: "100vh",
-    margin: "auto",
-    overflowX: "scroll",
-    overflowY: "scroll",
-  };
-
   sytleForPhotoContainer = {
     width: "100%",
     height: "100%",
