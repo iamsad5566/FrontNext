@@ -1,3 +1,7 @@
+body {
+  overflow: scroll;
+}
+
 *,
 *::before,
 *::after {
@@ -984,8 +988,21 @@ input[type="checkbox"] {
 }
 
 #worksContainer {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overflow: scroll;
+}
+
+#postContainer::-webkit-scrollbar {
+  display: none;
+}
+
+#postContainer {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overflow: scroll;
 }
 
 #journalLink {
