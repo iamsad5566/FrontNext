@@ -72,6 +72,7 @@ const Home = () => {
     margin: "auto",
     overflowX: "scroll",
     overflowY: "scroll",
+    zIndex: 2,
   };
 
   useEffect(() => {
