@@ -12,16 +12,18 @@ class BlogService {
     this.config.headers.Authorization = token;
   }
 
-  getAllArticles(category) {
+  getAllArticles(category, visited) {
+    console.log(visited);
     return axios.get(
       this.address + `article/getAllArticles/${category}`,
       this.config
     );
   }
 
-  getRowsByCategory(category) {
+  getRowsByCategory(category, visited) {
     return axios.get(
-      this.address + `article/get_rows_by_category/${category}`,
+      this.address +
+        `article/get_rows_by_category/${category}?visited=${visited}`,
       this.config
     );
   }
@@ -34,9 +36,9 @@ class BlogService {
     );
   }
 
-  getSingleArticle(postId) {
+  getSingleArticle(postId, visited) {
     return axios.get(
-      this.address + `article/getSingleArticle/${postId}`,
+      this.address + `article/getSingleArticle/${postId}?visited=${visited}`,
       this.config
     );
   }
