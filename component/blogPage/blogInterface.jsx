@@ -60,7 +60,7 @@ const BlogInterface = () => {
           alert("Someting wrong, please try to reload the page!");
         });
     }
-    document.cookie = "SameSite=Lax; Secure";
+    document.cookie = "SameSite=None; Secure";
   }, [postCategory]);
 
   return (
