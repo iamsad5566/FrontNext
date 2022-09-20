@@ -12,6 +12,7 @@ import TableInterface from "../component/homePage/tableComponent/tableInterface"
 import Works from "../component/homePage/works";
 import Link from "next/dist/client/link";
 import Head from "next/head";
+import CookieParser from "../component/module/CookieParser";
 
 const Home = () => {
   const [loginButton, setLoginButton] = useState("Login if you are yk");
@@ -87,8 +88,9 @@ const Home = () => {
       setLoading(false);
     };
 
-    if (document.cookie.includes(setting.admin)) {
-      let password = getPasswordFromCookie();
+    let password = CookieParser.getPassword(document.cookie, setting.admin);
+    console.log(password);
+    if (password != undefined) {
       authenticationService.login(setting.admin, password).then((response) => {
         authenticationService.registerLogin(setting.admin, response.data.token);
         setLoggedIn(true);

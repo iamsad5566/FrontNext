@@ -73,17 +73,13 @@ const Article = (props) => {
         ) : (
           <></>
         )}
-        {loggedIn ? (
-          <div style={{ marginTop: "1.5em" }}>
+        <div style={{ marginTop: "1.5em" }}>
+          {" "}
+          <p>
             {" "}
-            <p>
-              {" "}
-              {`今日點擊次數：${articleTodayBrowse}， 總點擊次數：${articleAllBrowse}`}
-            </p>{" "}
-          </div>
-        ) : (
-          <></>
-        )}
+            {`今日瀏覽次數：${articleTodayBrowse}， 總瀏覽次數：${articleAllBrowse}`}
+          </p>{" "}
+        </div>
       </div>
       <hr className="my-4" />
     </React.Fragment>

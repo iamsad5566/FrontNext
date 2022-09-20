@@ -3,6 +3,7 @@ import Setting from "../../../setting";
 import AuthenticationService from "../../api/AuthenticationService";
 import BlogService from "../../api/BlogService";
 import Loading from "../loading";
+import CookieParser from "../module/CookieParser";
 import BlogHeader from "./blogHeader";
 import Categories from "./categories";
 import MainContent from "./mainContent";
@@ -25,9 +26,9 @@ const BlogInterface = () => {
     setPostCategory(event.target.value);
   };
 
-  function getRows() {
+  function getRows(visited) {
     blogService
-      .getRowsByCategory(postCategory)
+      .getRowsByCategory(postCategory, visited)
       .then((response) => {
         setRowsForEachCategory(response.data);
       })
@@ -43,24 +44,26 @@ const BlogInterface = () => {
   }
 
   useEffect(() => {
+    let visited = CookieParser.hasVisited(document.cookie, "blog");
     if (authenticationService.isLoggedIn()) {
+      document.cookie = "blog=visited; max-age=86400; path=/blog";
       setLoggedIn(true);
       let token = sessionStorage.getItem(setting.admin);
       blogService.saveToken(token);
-      getRows();
+      getRows(visited);
     } else {
       authenticationService
         .login("guest", "guest")
         .then((response) => {
+          document.cookie = "blog=visited; max-age=86400; path=/blog";
           authenticationService.registerLogin("guest", response.data.token);
           blogService.saveToken(sessionStorage.getItem("guest"));
-          getRows();
+          getRows(visited);
         })
         .catch(() => {
-          alert("Someting wrong, please try to reload the page!");
+          // alert("Someting wrong, please try to reload the page!");
         });
     }
-    document.cookie = "SameSite=None; Secure";
   }, [postCategory]);
 
   return (
@@ -92,11 +95,7 @@ const BlogInterface = () => {
         )}
         <div style={{ marginTop: "2em" }}></div>
         <span>
-          {loggedIn ? (
-            <p>{`今日瀏覽次數：${todayBrowseTimes}， 總瀏覽次數：${totalBrowseTimes}`}</p>
-          ) : (
-            <></>
-          )}
+          <p>{`今日瀏覽次數：${todayBrowseTimes}， 總瀏覽次數：${totalBrowseTimes}`}</p>
         </span>
       </div>
     </React.Fragment>

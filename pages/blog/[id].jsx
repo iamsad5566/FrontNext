@@ -9,6 +9,7 @@ import Head from "next/head";
 import { getPostData } from "../../component/blogPage/mainContent";
 import BlogService from "../../api/BlogService";
 import Setting from "../../../setting";
+import CookieParser from "../../component/module/CookieParser";
 
 const Post = (props) => {
   let router = useRouter();
@@ -39,10 +40,12 @@ const Post = (props) => {
 
   useEffect(() => {
     dealWithATag();
+    let visited = CookieParser.hasVisited(document.cookie, id);
+    document.cookie = `${id}=visited; max-age=86400; path=/blog/${id}`;
     if (authenticationService.isLoggedIn()) {
       setIsLoggedIn(true);
       blogService.saveToken(sessionStorage.getItem(setting.admin));
-      blogService.getSingleArticle(id).then((response) => {
+      blogService.getSingleArticle(id, visited).then((response) => {
         setUpdateContent(response.data.content);
       });
     } else {
@@ -50,7 +53,7 @@ const Post = (props) => {
         blogService.saveToken(
           authenticationService.createToken(response.data.token)
         );
-        blogService.getSingleArticle(id).then((res) => {
+        blogService.getSingleArticle(id, visited).then((res) => {
           setUpdateContent(res.data.content);
         });
       });
