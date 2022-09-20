@@ -5,7 +5,7 @@ class BlogService {
   setting = new Setting();
   address = this.setting.prefixAddress;
   config = {
-    headers: { Authorization: "" },
+    headers: { Authorization: "", withCredentials: true },
   };
 
   saveToken(token) {
