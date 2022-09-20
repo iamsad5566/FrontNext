@@ -27,14 +27,14 @@ const Article = (props) => {
   };
 
   useEffect(() => {
-    if (authenticationService.isLoggedIn()) {
-      setLoggedIn(true);
-      blogService.saveToken(sessionStorage.getItem(setting.admin));
-      blogService.getArticleBrowse(postId).then((response) => {
-        setArticleTodayBrowse(response.data[0]);
-        setArticleAllBrowse(response.data[1]);
-      });
-    }
+    let account = authenticationService.isLoggedIn() ? setting.admin : "guest";
+    setLoggedIn(authenticationService.isLoggedIn());
+
+    blogService.saveToken(sessionStorage.getItem(account));
+    blogService.getArticleBrowse(postId).then((response) => {
+      setArticleTodayBrowse(response.data[0]);
+      setArticleAllBrowse(response.data[1]);
+    });
   }, [postId]);
 
   return (

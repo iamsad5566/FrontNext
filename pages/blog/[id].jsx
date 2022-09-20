@@ -41,7 +41,7 @@ const Post = (props) => {
   useEffect(() => {
     dealWithATag();
     let visited = CookieParser.hasVisited(document.cookie, id);
-    document.cookie = `${id}=visited; max-age=86400; path=/blog/${id}`;
+    document.cookie = `${id}=visited; max-age=86400; path=/`;
     if (authenticationService.isLoggedIn()) {
       setIsLoggedIn(true);
       blogService.saveToken(sessionStorage.getItem(setting.admin));

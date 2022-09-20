@@ -14,7 +14,6 @@ const BlogInterface = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [postCategory, setPostCategory] = useState("All");
   const [rowsForEachCategory, setRowsForEachCategory] = useState(0);
-  const [loggedIn, setLoggedIn] = useState(false);
   let key = 0;
   const authenticationService = new AuthenticationService();
   const blogService = new BlogService();
@@ -47,7 +46,6 @@ const BlogInterface = () => {
     let visited = CookieParser.hasVisited(document.cookie, "blog");
     if (authenticationService.isLoggedIn()) {
       document.cookie = "blog=visited; max-age=86400; path=/blog";
-      setLoggedIn(true);
       let token = sessionStorage.getItem(setting.admin);
       blogService.saveToken(token);
       getRows(visited);
@@ -61,7 +59,7 @@ const BlogInterface = () => {
           getRows(visited);
         })
         .catch(() => {
-          // alert("Someting wrong, please try to reload the page!");
+          alert("Someting wrong, please try to reload the page!");
         });
     }
   }, [postCategory]);

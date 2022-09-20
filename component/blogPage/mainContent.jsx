@@ -136,7 +136,7 @@ export async function getPostData(id) {
   });
 
   const res = await fetch(
-    `https://tw-yk.website:81/article/getSingleArticle/${id}`,
+    `https://tw-yk.website:81/article/getSingleArticle/${id}?visited=true`,
     {
       headers: { Authorization: token },
     }

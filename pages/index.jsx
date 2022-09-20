@@ -89,7 +89,6 @@ const Home = () => {
     };
 
     let password = CookieParser.getPassword(document.cookie, setting.admin);
-    console.log(password);
     if (password != undefined) {
       authenticationService.login(setting.admin, password).then((response) => {
         authenticationService.registerLogin(setting.admin, response.data.token);
