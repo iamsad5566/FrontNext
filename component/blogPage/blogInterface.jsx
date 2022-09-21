@@ -45,7 +45,7 @@ const BlogInterface = () => {
   useEffect(() => {
     let visited = CookieParser.hasVisited(document.cookie, "blog");
     if (authenticationService.isLoggedIn()) {
-      document.cookie = "blog=visited; max-age=86400; path=/blog";
+      document.cookie = "blog=visited; max-age=86400; path=/";
       let token = sessionStorage.getItem(setting.admin);
       blogService.saveToken(token);
       getRows(visited);
@@ -53,7 +53,7 @@ const BlogInterface = () => {
       authenticationService
         .login("guest", "guest")
         .then((response) => {
-          document.cookie = "blog=visited; max-age=86400; path=/blog";
+          document.cookie = "blog=visited; max-age=86400; path=/";
           authenticationService.registerLogin("guest", response.data.token);
           blogService.saveToken(sessionStorage.getItem("guest"));
           getRows(visited);
@@ -68,9 +68,9 @@ const BlogInterface = () => {
     <React.Fragment>
       <BlogHeader />
       <div id="blogArticleContainer">
-        <h2 style={{ display: "inline", fontSize: "1.5em" }}>Category:</h2>
+        <h2 style={{ display: "inline", fontSize: "1.8em" }}>Category:</h2>
         <select
-          style={{ marginLeft: "1em" }}
+          style={{ marginLeft: "1em", fontSize: "1.5em", width: "5em" }}
           value={postCategory}
           onChange={(event) => handleCategory(event)}
         >

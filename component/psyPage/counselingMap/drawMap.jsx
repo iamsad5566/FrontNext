@@ -290,8 +290,8 @@ const DrawMap = (props) => {
     alignItem: "center",
     textAlign: "right",
     justifyContent: "center",
-    height: "68vh",
-    overflow: "hidden",
+    height: "70vh",
+    overflow: "auto",
   };
 
   const styleForBarChart = {
@@ -393,7 +393,7 @@ const DrawMap = (props) => {
             </button>
           </div>
           <div className="col-sm-6" id="tw" style={styleForTaiwan}>
-            <svg className="img-fluid" height="750" width="750">
+            <svg className="img-fluid" width="700">
               <g stroke="white" id="twMap" fill="DarkGreen">
                 {Features.map((feature) => {
                   return (

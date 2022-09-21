@@ -75,7 +75,7 @@ const Article = (props) => {
         )}
         <div style={{ marginTop: "1.5em" }}>
           {" "}
-          <p>
+          <p style={{ color: "#008B8B", fontFamily: "Chalkduster" }}>
             {" "}
             {`今日瀏覽次數：${articleTodayBrowse}， 總瀏覽次數：${articleAllBrowse}`}
           </p>{" "}
