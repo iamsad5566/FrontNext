@@ -88,7 +88,7 @@ const UpdatePost = (props) => {
 
   useEffect(() => {
     blogService.saveToken(sessionStorage.getItem(setting.admin));
-    blogService.getSingleArticle(postID).then((response) => {
+    blogService.getSingleArticle(postID, true).then((response) => {
       setTitle(response.data.title);
       setContent(response.data.content);
     });
