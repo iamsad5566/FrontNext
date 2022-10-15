@@ -70,7 +70,12 @@ const BlogInterface = () => {
       <div id="blogArticleContainer">
         <h2 style={{ display: "inline", fontSize: "1.8em" }}>Category:</h2>
         <select
-          style={{ marginLeft: "1em", fontSize: "1.5em", width: "5em" }}
+          style={{
+            marginLeft: "1em",
+            fontSize: "1.5em",
+            width: "6em",
+            textAlign: "center",
+          }}
           value={postCategory}
           onChange={(event) => handleCategory(event)}
         >
