@@ -20,6 +20,9 @@ const MainContent = (props) => {
   const numbersOfItems = props.rowsForEachCategory;
 
   const handlePageChange = (page) => {
+    if (currentPage === page) {
+      return;
+    }
     setCurrentPage(page);
     let tmpOffset = (page - 1) * pageSize;
     setOffset(tmpOffset);
