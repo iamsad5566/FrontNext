@@ -28,18 +28,24 @@ const NavBar = () => {
       <div className="wrapper">
         <ul>
           <li>
-            <Link href="/">
+            <Link legacyBehavior href="/">
               <a onClick={handleClick}>Home</a>
             </Link>
           </li>
           <li>
-            <Link href="/blog">Blog</Link>
+            <Link legacyBehavior href="/blog">
+              Blog
+            </Link>
           </li>
           <li>
-            <Link href="/psychology">Psy</Link>
+            <Link legacyBehavior href="/psychology">
+              Psy
+            </Link>
           </li>
           <li>
-            <Link href="/other_services">Other services</Link>
+            <Link legacyBehavior href="/other_services">
+              Other services
+            </Link>
           </li>
         </ul>
       </div>

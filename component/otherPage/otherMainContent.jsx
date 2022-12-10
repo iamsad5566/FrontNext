@@ -42,12 +42,12 @@ const OtherMainContent = () => {
             }}
           >
             <li style={{ padding: "1em 0em" }}>
-              <Link href={prefix + "/chatroom"}>
+              <Link legacyBehavior href={prefix + "/chatroom"}>
                 <a className="other-title"> Chat room </a>
               </Link>
             </li>
             <li style={{ padding: "1em 0em" }}>
-              <Link href={prefix + "/postman"}>
+              <Link legacyBehavior href={prefix + "/postman"}>
                 <a className="other-title"> Gmail postman </a>
               </Link>
             </li>

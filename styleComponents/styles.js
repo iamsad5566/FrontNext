@@ -73,7 +73,7 @@ class StyleComponent {
     textAlign: "center",
     fontStyle: "italic",
     fontFamily: "Georgia",
-    fontSize: "25px",
+    fontSize: "2em",
     testHeight: "50px",
     color: "rgb(184, 134, 11)",
     padding: "50px",

@@ -94,7 +94,7 @@ const Post = (props) => {
       <NavBar />
       <header className="masthead" style={styleForBackgroundImage}>
         <div className="container position-relative px-4 px-lg-5">
-          <Link href="/blog">
+          <Link legacyBehavior href="/blog">
             <svg
               id="back"
               xmlns="//www.w3.org/2000/svg"
