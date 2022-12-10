@@ -1121,6 +1121,11 @@ blockquote > :first-child {
   list-style: none;
 }
 
+.categoryPointer:hover {
+  cursor: pointer;
+  color: #396bff;
+}
+
 .pagination-lg .page-link {
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;

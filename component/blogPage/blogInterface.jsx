@@ -6,6 +6,7 @@ import Loading from "../loading";
 import CookieParser from "../module/CookieParser";
 import BlogHeader from "./blogHeader";
 import Categories from "./categories";
+import CategoryIndex from "./categoryIndex";
 import MainContent from "./mainContent";
 
 const BlogInterface = () => {
@@ -14,11 +15,11 @@ const BlogInterface = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [postCategory, setPostCategory] = useState("All");
   const [rowsForEachCategory, setRowsForEachCategory] = useState(0);
+  const [width, setWidth] = useState(0);
   let key = 0;
   const authenticationService = new AuthenticationService();
   const blogService = new BlogService();
   const setting = new Setting();
-  let categories = new Categories();
 
   const handleCategory = (event) => {
     setIsLoading(false);
@@ -62,32 +63,18 @@ const BlogInterface = () => {
           alert("Someting wrong, please try to reload the page!");
         });
     }
+    setWidth(window.innerWidth);
   }, [postCategory]);
 
   return (
     <React.Fragment>
       <BlogHeader />
+      <CategoryIndex
+        width={width}
+        postCategory={postCategory}
+        handleCategory={handleCategory}
+      />
       <div id="blogArticleContainer">
-        <h2 style={{ display: "inline", fontSize: "1.8em" }}>Category:</h2>
-        <select
-          style={{
-            marginLeft: "1em",
-            fontSize: "1.5em",
-            width: "6em",
-            textAlign: "center",
-          }}
-          value={postCategory}
-          onChange={(event) => handleCategory(event)}
-        >
-          {categories.all.map((category) => {
-            return (
-              <option value={category} key={key++}>
-                {" "}
-                {category}{" "}
-              </option>
-            );
-          })}
-        </select>
         {isLoading ? (
           <MainContent
             rowsForEachCategory={rowsForEachCategory}

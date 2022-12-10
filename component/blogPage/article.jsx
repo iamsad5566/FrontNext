@@ -40,7 +40,7 @@ const Article = (props) => {
   return (
     <React.Fragment>
       <div className="post-preview" style={{ margin: "2em 0em" }}>
-        <Link href={`/blog/${postId}`}>
+        <Link legacyBehavior href={`/blog/${postId}`}>
           <span id="articleContainer">
             <h1 className="post-title">{title}</h1>
             <span
