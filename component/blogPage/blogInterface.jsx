@@ -5,7 +5,6 @@ import BlogService from "../../api/BlogService";
 import Loading from "../loading";
 import CookieParser from "../module/CookieParser";
 import BlogHeader from "./blogHeader";
-import Categories from "./categories";
 import CategoryIndex from "./categoryIndex";
 import MainContent from "./mainContent";
 
@@ -22,8 +21,19 @@ const BlogInterface = () => {
   const setting = new Setting();
 
   const handleCategory = (event) => {
+    if (postCategory === event.target.value) {
+      return;
+    }
     setIsLoading(false);
     setPostCategory(event.target.value);
+  };
+
+  const handleCategoryByText = (txt) => {
+    if (txt === postCategory) {
+      return;
+    }
+    setIsLoading(false);
+    setPostCategory(txt);
   };
 
   function getRows(visited) {
@@ -73,6 +83,7 @@ const BlogInterface = () => {
         width={width}
         postCategory={postCategory}
         handleCategory={handleCategory}
+        handleCategoryByText={handleCategoryByText}
       />
       <div id="blogArticleContainer">
         {isLoading ? (
