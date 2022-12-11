@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Categories from "./categories";
 
 const CategoryIndex = (props) => {
-  const { width, handleCategory, postCategory } = props;
+  const { width, handleCategory, postCategory, handleCategoryByText } = props;
   let categories = new Categories();
   let key = 0;
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      let floatingWindow = document.getElementById("floatingCategory");
+
+      if (window.scrollY > 300) {
+        floatingWindow.style.position = "fixed";
+        floatingWindow.style.top = window.innerHeight / 3 + "px";
+      } else {
+        floatingWindow.style.position = "fixed";
+        floatingWindow.style.top = null;
+      }
+    });
+  }, []);
 
   return (
     <React.Fragment>
       {width <= 1000 ? (
-        <div>
-          <h2 style={{ display: "inline", fontSize: "1.8em" }}>Category:</h2>
+        <div style={{ textAlign: "center" }}>
+          <h2 style={{ display: "inline", fontSize: "1.5em" }}>Category:</h2>
           <select
             style={{
               marginLeft: "1em",
-              fontSize: "1.5em",
+              fontSize: "1.2em",
               width: "6em",
               textAlign: "center",
             }}
@@ -33,6 +47,7 @@ const CategoryIndex = (props) => {
         </div>
       ) : (
         <div
+          id="floatingCategory"
           style={{
             position: "fixed",
             margin: `5em 0em 0em ${width <= 1800 ? width / 50 : width / 15}px`,
@@ -47,15 +62,18 @@ const CategoryIndex = (props) => {
               listStylePosition: "inside",
               fontSize: "1.5em",
             }}
-            onClick={(event) => handleCategory(event)}
           >
             {categories.all.map((category) => {
               return (
-                <li className="categoryPointer" key={key++}>
-                  <option style={{ display: "inline-block" }} value={category}>
-                    {" "}
-                    {category}{" "}
-                  </option>
+                <li key={key++}>
+                  <p
+                    className="categoryPointer"
+                    style={{ display: "inline-block" }}
+                    value={category}
+                    onClick={() => handleCategoryByText(category)}
+                  >
+                    {category}
+                  </p>
                 </li>
               );
             })}
