@@ -7,17 +7,21 @@ const CategoryIndex = (props) => {
   let key = 0;
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    let floating = () => {
       let floatingWindow = document.getElementById("floatingCategory");
 
-      if (window.scrollY > 300) {
+      if (window.scrollY > 350) {
         floatingWindow.style.position = "fixed";
         floatingWindow.style.top = window.innerHeight / 3 + "px";
       } else {
-        floatingWindow.style.position = "fixed";
         floatingWindow.style.top = null;
       }
-    });
+    };
+    window.addEventListener("scroll", floating);
+
+    return () => {
+      window.removeEventListener("scroll", floating);
+    };
   }, []);
 
   return (
