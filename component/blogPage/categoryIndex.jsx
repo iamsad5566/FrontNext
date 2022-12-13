@@ -10,9 +10,9 @@ const CategoryIndex = (props) => {
     let floating = () => {
       let floatingWindow = document.getElementById("floatingCategory");
 
-      if (window.scrollY > 350) {
+      if (window.scrollY > 400) {
         floatingWindow.style.position = "fixed";
-        floatingWindow.style.top = window.innerHeight / 3 + "px";
+        floatingWindow.style.top = (window.innerHeight * 1.2) / 4 + "px";
       } else {
         floatingWindow.style.top = null;
       }
@@ -55,7 +55,7 @@ const CategoryIndex = (props) => {
           style={{
             position: "fixed",
             margin: `5em 0em 0em ${width <= 1800 ? width / 50 : width / 15}px`,
-            lineHeight: "2",
+            lineHeight: "1.5",
             textAlign: "left",
           }}
         >

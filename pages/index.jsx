@@ -70,7 +70,7 @@ const Home = () => {
     alignItem: "center",
     textAlign: "center",
     height: "100vh",
-    margin: "auto",
+    margin: "3.5em",
     overflowX: "scroll",
     overflowY: "scroll",
     zIndex: 2,
@@ -195,7 +195,7 @@ const Home = () => {
         </div>
 
         <div className="row" id="worksContainer" style={styleForWorkFullCover}>
-          <div style={{ marginTop: "5vh" }}>
+          <div>
             <h1>My works</h1>
             {!hasLoggedIn ? (
               <></>
