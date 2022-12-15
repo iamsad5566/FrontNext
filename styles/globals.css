@@ -1123,7 +1123,7 @@ blockquote > :first-child {
 
 .categoryPointer:hover {
   cursor: pointer;
-  color: #396bff;
+  color: #f2ff39;
 }
 
 .pagination-lg .page-link {
@@ -1929,11 +1929,44 @@ header.masthead .post-heading .meta a {
   --dark: hsl(var(--hue), 25%, 10%);
   --grey: hsl(0, 0%, 50%);
 
-  width: 230px;
-  height: 400px;
+  width: 280px;
+  height: 450px;
   margin: 40px;
 
   perspective: 1000px;
+}
+
+.flip-card-container-s {
+  --hue: 150;
+  --primary: hsl(var(--hue), 50%, 50%);
+  --white-1: hsl(0, 0%, 90%);
+  --white-2: hsl(0, 0%, 80%);
+  --dark: hsl(var(--hue), 25%, 10%);
+  --grey: hsl(0, 0%, 50%);
+
+  width: 280px;
+  height: 450px;
+  margin: 40px;
+
+  perspective: 1000px;
+}
+
+.flip-card-container-f {
+  --hue: 150;
+  --primary: hsl(var(--hue), 50%, 50%);
+  --white-1: hsl(0, 0%, 90%);
+  --white-2: hsl(0, 0%, 80%);
+  --dark: hsl(var(--hue), 25%, 10%);
+  --grey: hsl(0, 0%, 50%);
+
+  width: 280px;
+  height: 450px;
+  margin: 40px;
+}
+
+.flip-card-container-f .design-container {
+  --tr: 20;
+  --op: 0.7;
 }
 
 /* .flip-card */
@@ -1948,7 +1981,11 @@ header.masthead .post-heading .meta a {
 
 /* hover and focus-within states */
 .flip-card-container:hover .flip-card,
-.flip-card-container:focus-within .flip-card button:active {
+.flip-card-container:focus button:active {
+  transform: rotateY(180deg);
+}
+
+.flip-card-container-s .flip-card {
   transform: rotateY(180deg);
 }
 
@@ -2082,15 +2119,10 @@ button {
   cursor: pointer;
 }
 
-button:hover,
-button:focus {
+button:hover {
   color: var(--primary);
   background: hsla(var(--hue), 25%, 10%, 0.2);
   border-color: currentColor;
-}
-
-button:active {
-  transform: translate(2px);
 }
 
 /* .design-container */
@@ -2193,9 +2225,7 @@ button:active {
 }
 
 /* states */
-button:hover + .design-container,
-button:active + .design-container,
-button:focus + .design-container {
+button:hover + .design-container {
   --tr: 20;
   --op: 0.7;
 }
@@ -2207,43 +2237,4 @@ button:focus + .design-container {
   color: hsla(0, 0%, 100%, 0.6);
   font-size: 16px;
   font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.categoryPointer {
-  animation: slide-in 0.6s forwards linear;
-  margin-left: 30%;
-  margin-top: 1em;
-  font-size: 2em;
-  width: 300px;
-}
-
-.categoryPointer:nth-child(1) {
-  animation-delay: 0.3s;
-  margin-left: 550%;
-}
-
-.categoryPointer:nth-child(2) {
-  animation-delay: 0.6s;
-  margin-left: 550%;
-}
-.categoryPointer:nth-child(3) {
-  animation-delay: 0.9s;
-  margin-left: 550%;
-}
-.categoryPointer:nth-child(4) {
-  animation-delay: 1.2s;
-  margin-left: 550%;
-}
-.categoryPointer:nth-child(5) {
-  animation-delay: 1.5s;
-  margin-left: 550%;
-}
-
-@keyframes slide-in {
-  from {
-    margin-left: 150%;
-  }
-  to {
-    margin-left: 30%;
-  }
 }

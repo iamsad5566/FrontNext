@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Categories from "./categories";
 import Card from "./card";
+import CardCategory from "./cardCategory";
 
 const CategoryIndex = (props) => {
   const { width, handleCategory, postCategory, handleCategoryByText } = props;
@@ -35,6 +36,10 @@ const CategoryIndex = (props) => {
 
     let rightFloating = () => {
       let right = document.getElementById("category");
+
+      if (right == null) {
+        return;
+      }
 
       if (window.scrollY > 400) {
         right.style.position = "fixed";
@@ -79,45 +84,35 @@ const CategoryIndex = (props) => {
           </select>
         </div>
       ) : (
-        <div
-          id="floatingCategory"
-          style={{
-            position: "fixed",
-            margin: `0em 0em 0em ${width <= 1800 ? 0 : width / 15}px`,
-            lineHeight: "1.5",
-            textAlign: "left",
-          }}
-        >
-          <Card showCategory={showCategory} showing={showing} />
-        </div>
+        <React.Fragment>
+          <div
+            id="floatingCategory"
+            style={{
+              position: "fixed",
+              margin: `0em 0em 0em ${width <= 1800 ? 0 : width / 15}px`,
+              lineHeight: "1.5",
+              textAlign: "left",
+            }}
+          >
+            <Card showCategory={showCategory} showing={showing} />
+          </div>
+          <div
+            id="category"
+            style={{
+              marginTop: "6.5em",
+              margin: `0em 0em 0em ${
+                width <= 1800 ? width - 370 : width - 560
+              }px`,
+              position: "fixed",
+            }}
+          >
+            <CardCategory
+              showing={showing}
+              handleCategoryByText={handleCategoryByText}
+            />
+          </div>
+        </React.Fragment>
       )}
-      <div
-        id="category"
-        style={{
-          marginTop: "6.5em",
-          margin: `0em 0em 0em ${width <= 1800 ? width - 370 : width - 570}px`,
-          position: "fixed",
-        }}
-      >
-        {showing ? (
-          <React.Fragment>
-            {categories.all.map((category) => {
-              return (
-                <div
-                  className="categoryPointer"
-                  value={category}
-                  key={key++}
-                  onClick={() => handleCategoryByText(category)}
-                >
-                  &#127809; {category}
-                </div>
-              );
-            })}
-          </React.Fragment>
-        ) : (
-          <></>
-        )}
-      </div>
     </React.Fragment>
   );
 };

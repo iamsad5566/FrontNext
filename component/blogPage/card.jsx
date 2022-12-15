@@ -19,7 +19,7 @@ const Card = (props) => {
             style={{
               color: "white",
               fontFamily: "cursive",
-              fontSize: "1em",
+              fontSize: "1.2em",
               paddingTop: "3em",
             }}
           >
@@ -38,7 +38,7 @@ const Card = (props) => {
           </figure>
 
           <button onClick={() => showCategory()}>
-            {showing ? "Close" : "Category"}
+            {showing ? "Flip" : "Show"}
           </button>
 
           <div className="design-container">
