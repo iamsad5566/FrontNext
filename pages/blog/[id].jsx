@@ -9,6 +9,7 @@ import Head from "next/head";
 import { getPostData } from "../../component/blogPage/mainContent";
 import BlogService from "../../api/BlogService";
 import Setting from "../../../setting";
+import CookieParser from "../../component/module/CookieParser";
 
 const Post = (props) => {
   let router = useRouter();
@@ -39,10 +40,12 @@ const Post = (props) => {
 
   useEffect(() => {
     dealWithATag();
+    let visited = CookieParser.hasVisited(document.cookie, id);
+    document.cookie = `${id}=visited; max-age=86400; path=/`;
     if (authenticationService.isLoggedIn()) {
       setIsLoggedIn(true);
       blogService.saveToken(sessionStorage.getItem(setting.admin));
-      blogService.getSingleArticle(id).then((response) => {
+      blogService.getSingleArticle(id, visited).then((response) => {
         setUpdateContent(response.data.content);
       });
     } else {
@@ -50,7 +53,7 @@ const Post = (props) => {
         blogService.saveToken(
           authenticationService.createToken(response.data.token)
         );
-        blogService.getSingleArticle(id).then((res) => {
+        blogService.getSingleArticle(id, visited).then((res) => {
           setUpdateContent(res.data.content);
         });
       });
@@ -91,7 +94,7 @@ const Post = (props) => {
       <NavBar />
       <header className="masthead" style={styleForBackgroundImage}>
         <div className="container position-relative px-4 px-lg-5">
-          <Link href="/blog">
+          <Link legacyBehavior href="/blog">
             <svg
               id="back"
               xmlns="//www.w3.org/2000/svg"
@@ -121,7 +124,10 @@ const Post = (props) => {
       <article className="mb-4">
         <div className="container px-4 px-lg-5">
           <div className="row gx-4 gx-lg-5 justify-content-center">
-            <div className="col-md-10 col-lg-8 col-xl-10" style={{ zIndex: 2 }}>
+            <div
+              className="col-md-10 col-lg-8 col-xl-10"
+              style={{ zIndex: 2, lineHeight: 2 }}
+            >
               <ReactMarkdown rehypePlugins={[rehypeRaw]}>
                 {updateContent}
               </ReactMarkdown>

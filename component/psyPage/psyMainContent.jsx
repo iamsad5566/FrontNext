@@ -50,32 +50,32 @@ const PsyMainContent = () => {
             }}
           >
             <li style={{ padding: `${padding}em 0em` }}>
-              <Link href={prefix + "/counseling_map"}>
+              <Link legacyBehavior href={prefix + "/counseling_map"}>
                 <a className="psy-title"> 全國心理師分佈資料 </a>
               </Link>
             </li>
             <li style={{ padding: `${padding}em 0em` }}>
-              <Link href={prefix + "/emo_color"}>
+              <Link legacyBehavior href={prefix + "/emo_color"}>
                 <a className="psy-title"> Emotion and memory (Beta) </a>
               </Link>
             </li>
             <li style={{ padding: `${padding}em 0em` }}>
-              <Link href={prefix + "/stroop_effect"}>
+              <Link legacyBehavior href={prefix + "/stroop_effect"}>
                 <a className="psy-title"> Stroop effect </a>
               </Link>
             </li>
             <li style={{ padding: `${padding}em 0em` }}>
-              <Link href={prefix + "/selective_attention"}>
+              <Link legacyBehavior href={prefix + "/selective_attention"}>
                 <a className="psy-title"> Selective attentition </a>
               </Link>
             </li>
             <li style={{ padding: `${padding}em 0em` }}>
-              <Link href={prefix + "/stroop_effect/result"}>
+              <Link legacyBehavior href={prefix + "/stroop_effect/result"}>
                 <a className="psy-title"> Result </a>
               </Link>
             </li>
             <li style={{ padding: `${padding}em 0em`, display: "none" }}>
-              <Link href={prefix + "/questionnaire/big5"}>
+              <Link legacyBehavior href={prefix + "/questionnaire/big5"}>
                 <a className="psy-title"> Big 5 </a>
               </Link>
             </li>

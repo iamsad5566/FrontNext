@@ -12,6 +12,7 @@ import TableInterface from "../component/homePage/tableComponent/tableInterface"
 import Works from "../component/homePage/works";
 import Link from "next/dist/client/link";
 import Head from "next/head";
+import CookieParser from "../component/module/CookieParser";
 
 const Home = () => {
   const [loginButton, setLoginButton] = useState("Login if you are yk");
@@ -69,7 +70,7 @@ const Home = () => {
     alignItem: "center",
     textAlign: "center",
     height: "100vh",
-    margin: "auto",
+    margin: "3.5em",
     overflowX: "scroll",
     overflowY: "scroll",
     zIndex: 2,
@@ -87,8 +88,8 @@ const Home = () => {
       setLoading(false);
     };
 
-    if (document.cookie.includes(setting.admin)) {
-      let password = getPasswordFromCookie();
+    let password = CookieParser.getPassword(document.cookie, setting.admin);
+    if (password != undefined) {
       authenticationService.login(setting.admin, password).then((response) => {
         authenticationService.registerLogin(setting.admin, response.data.token);
         setLoggedIn(true);
@@ -194,7 +195,7 @@ const Home = () => {
         </div>
 
         <div className="row" id="worksContainer" style={styleForWorkFullCover}>
-          <div style={{ marginTop: "5vh" }}>
+          <div>
             <h1>My works</h1>
             {!hasLoggedIn ? (
               <></>

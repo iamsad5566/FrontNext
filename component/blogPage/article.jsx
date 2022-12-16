@@ -27,20 +27,20 @@ const Article = (props) => {
   };
 
   useEffect(() => {
-    if (authenticationService.isLoggedIn()) {
-      setLoggedIn(true);
-      blogService.saveToken(sessionStorage.getItem(setting.admin));
-      blogService.getArticleBrowse(postId).then((response) => {
-        setArticleTodayBrowse(response.data[0]);
-        setArticleAllBrowse(response.data[1]);
-      });
-    }
+    let account = authenticationService.isLoggedIn() ? setting.admin : "guest";
+    setLoggedIn(authenticationService.isLoggedIn());
+
+    blogService.saveToken(sessionStorage.getItem(account));
+    blogService.getArticleBrowse(postId).then((response) => {
+      setArticleTodayBrowse(response.data[0]);
+      setArticleAllBrowse(response.data[1]);
+    });
   }, [postId]);
 
   return (
     <React.Fragment>
       <div className="post-preview" style={{ margin: "2em 0em" }}>
-        <Link href={`/blog/${postId}`}>
+        <Link legacyBehavior href={`/blog/${postId}`}>
           <span id="articleContainer">
             <h1 className="post-title">{title}</h1>
             <span
@@ -73,17 +73,13 @@ const Article = (props) => {
         ) : (
           <></>
         )}
-        {loggedIn ? (
-          <div style={{ marginTop: "1.5em" }}>
+        <div style={{ marginTop: "1.5em" }}>
+          {" "}
+          <p style={{ color: "#008B8B", fontFamily: "Chalkduster" }}>
             {" "}
-            <p>
-              {" "}
-              {`今日點擊次數：${articleTodayBrowse}， 總點擊次數：${articleAllBrowse}`}
-            </p>{" "}
-          </div>
-        ) : (
-          <></>
-        )}
+            {`今日瀏覽次數：${articleTodayBrowse}， 總瀏覽次數：${articleAllBrowse}`}
+          </p>{" "}
+        </div>
       </div>
       <hr className="my-4" />
     </React.Fragment>

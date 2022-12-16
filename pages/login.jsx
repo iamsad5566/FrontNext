@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthenticationService from "../api/AuthenticationService";
 import Link from "next/dist/client/link";
+import Head from "next/head";
 
 const Login = () => {
   const [info, setInfo] = useState({ userName: "", password: "" });
@@ -70,6 +71,9 @@ const Login = () => {
 
   return (
     <React.Fragment>
+      <Head>
+        <title>Login</title>
+      </Head>
       <div style={styleForContainer}>
         <form>
           <span>

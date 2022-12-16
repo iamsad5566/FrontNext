@@ -20,6 +20,9 @@ const MainContent = (props) => {
   const numbersOfItems = props.rowsForEachCategory;
 
   const handlePageChange = (page) => {
+    if (currentPage === page) {
+      return;
+    }
     setCurrentPage(page);
     let tmpOffset = (page - 1) * pageSize;
     setOffset(tmpOffset);
@@ -81,7 +84,7 @@ const MainContent = (props) => {
         <div className="container px-4 px-lg-5">
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div
-              className="col-md-10 col-lg-8 col-xl-7"
+              className="col-md-10 col-lg-8 col-xl-8"
               style={{ textAlign: "left" }}
             >
               {authenticationService.isLoggedIn() ? (
@@ -136,7 +139,7 @@ export async function getPostData(id) {
   });
 
   const res = await fetch(
-    `https://tw-yk.website:81/article/getSingleArticle/${id}`,
+    `https://tw-yk.website:81/article/getSingleArticle/${id}?visited=true`,
     {
       headers: { Authorization: token },
     }

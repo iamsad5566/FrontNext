@@ -2,9 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    outputStandalone: true,
-  },
+  output: "standalone",
+  staticPageGenerationTimeout: 100,
 };
 
 module.exports = nextConfig;
