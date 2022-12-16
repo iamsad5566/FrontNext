@@ -5,7 +5,7 @@ const CardInteract = (props) => {
   return (
     <div
       className="flip-card-container"
-      style={{ width: width, height: height }}
+      style={{ width: width, height: height, zIndex: 3 }}
     >
       <div className="flip-card">
         <div className="card-front">

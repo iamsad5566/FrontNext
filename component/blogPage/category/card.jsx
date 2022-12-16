@@ -62,7 +62,8 @@ const Card = (props) => {
         style={{
           position: "fixed",
           width: "100%",
-          height: "20vh",
+          height: "auto",
+          zIndex: 1,
         }}
       >
         <span

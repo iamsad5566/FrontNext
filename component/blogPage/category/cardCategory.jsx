@@ -12,7 +12,7 @@ const CardCategory = (props) => {
     <div className="reverse-container">
       <div
         className={showing ? show : fix}
-        style={{ width: width, height: height }}
+        style={{ width: width, height: height, zIndex: 3 }}
       >
         <div className="flip-card">
           <div className="card-back">
