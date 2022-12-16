@@ -2042,12 +2042,12 @@ header.masthead .post-heading .meta a {
 }
 
 /* figure */
-figure {
+#card-figure {
   z-index: -1;
 }
 
 /* figure, .img-bg */
-figure,
+#card-figure,
 .img-bg {
   position: absolute;
   top: 0;
@@ -2058,7 +2058,7 @@ figure,
 }
 
 /* img */
-img {
+#card-figure > img {
   height: 100%;
   border-radius: 24px;
 }
@@ -2123,7 +2123,7 @@ figcaption {
 }
 
 /* button */
-button {
+.card-back > button {
   font-family: inherit;
   font-weight: bold;
   color: var(--white-1);
@@ -2139,7 +2139,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.card-back > button:hover {
   color: var(--primary);
   background: hsla(var(--hue), 25%, 10%, 0.2);
   border-color: currentColor;
@@ -2245,7 +2245,7 @@ button:hover {
 }
 
 /* states */
-button:hover + .design-container {
+.card-back > button:hover + .design-container {
   --tr: 20;
   --op: 0.7;
 }

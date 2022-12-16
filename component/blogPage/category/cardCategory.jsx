@@ -16,7 +16,7 @@ const CardCategory = (props) => {
       >
         <div className="flip-card">
           <div className="card-back">
-            <figure>
+            <figure id="card-figure">
               <img
                 src="https://images.unsplash.com/photo-1486162928267-e6274cb3106f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                 alt="Brohm Lake"

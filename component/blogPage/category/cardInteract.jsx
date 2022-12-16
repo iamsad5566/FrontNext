@@ -9,7 +9,7 @@ const CardInteract = (props) => {
     >
       <div className="flip-card">
         <div className="card-front">
-          <figure>
+          <figure id="card-figure">
             <div className="img-bg"></div>
             <img
               src="https://images.unsplash.com/photo-1545436864-cd9bdd1ddebc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
@@ -33,7 +33,7 @@ const CardInteract = (props) => {
         </div>
 
         <div className="card-back">
-          <figure>
+          <figure id="card-figure">
             <div className="img-bg"></div>
             <img
               src="https://images.unsplash.com/photo-1545436864-cd9bdd1ddebc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
