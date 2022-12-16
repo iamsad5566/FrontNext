@@ -5,7 +5,7 @@ import BlogService from "../../api/BlogService";
 import Loading from "../loading";
 import CookieParser from "../module/CookieParser";
 import BlogHeader from "./blogHeader";
-import CategoryIndex from "./categoryIndex";
+import ShowingController from "./category/showingController";
 import MainContent from "./mainContent";
 
 const BlogInterface = () => {
@@ -14,8 +14,6 @@ const BlogInterface = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [postCategory, setPostCategory] = useState("All");
   const [rowsForEachCategory, setRowsForEachCategory] = useState(0);
-  const [width, setWidth] = useState(0);
-  let key = 0;
   const authenticationService = new AuthenticationService();
   const blogService = new BlogService();
   const setting = new Setting();
@@ -73,14 +71,12 @@ const BlogInterface = () => {
           alert("Someting wrong, please try to reload the page!");
         });
     }
-    setWidth(window.innerWidth);
   }, [postCategory]);
 
   return (
     <React.Fragment>
       <BlogHeader />
-      <CategoryIndex
-        width={width}
+      <ShowingController
         postCategory={postCategory}
         handleCategory={handleCategory}
         handleCategoryByText={handleCategoryByText}

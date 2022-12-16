@@ -178,6 +178,7 @@ export const getStaticPaths = () => {
     "26",
     "27",
     "29",
+    "42",
   ];
   return {
     paths: idArr.map((m) => {

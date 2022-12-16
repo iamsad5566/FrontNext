@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import NavBar from "../navbar";
-import Categories from "./categories";
+import Categories from "./category/categories";
 import MDEditor from "./mdEditor";
 
 const AddPost = () => {

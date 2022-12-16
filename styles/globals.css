@@ -1929,11 +1929,16 @@ header.masthead .post-heading .meta a {
   --dark: hsl(var(--hue), 25%, 10%);
   --grey: hsl(0, 0%, 50%);
 
-  width: 280px;
+  width: 300px;
   height: 450px;
   margin: 40px;
 
   perspective: 1000px;
+}
+
+.reverse-container {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .flip-card-container-s {
@@ -1944,11 +1949,14 @@ header.masthead .post-heading .meta a {
   --dark: hsl(var(--hue), 25%, 10%);
   --grey: hsl(0, 0%, 50%);
 
-  width: 280px;
+  width: 300px;
   height: 450px;
   margin: 40px;
 
   perspective: 1000px;
+
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .flip-card-container-f {
@@ -1959,14 +1967,26 @@ header.masthead .post-heading .meta a {
   --dark: hsl(var(--hue), 25%, 10%);
   --grey: hsl(0, 0%, 50%);
 
-  width: 280px;
+  width: 300px;
   height: 450px;
   margin: 40px;
+
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .flip-card-container-f .design-container {
   --tr: 20;
   --op: 0.7;
+}
+
+.flip-card-container-s > .flip-card {
+  width: inherit;
+  height: inherit;
+
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 1s 0.5s;
 }
 
 /* .flip-card */
@@ -2022,12 +2042,12 @@ header.masthead .post-heading .meta a {
 }
 
 /* figure */
-figure {
+#card-figure {
   z-index: -1;
 }
 
 /* figure, .img-bg */
-figure,
+#card-figure,
 .img-bg {
   position: absolute;
   top: 0;
@@ -2038,7 +2058,7 @@ figure,
 }
 
 /* img */
-img {
+#card-figure > img {
   height: 100%;
   border-radius: 24px;
 }
@@ -2103,7 +2123,7 @@ figcaption {
 }
 
 /* button */
-button {
+.card-back > button {
   font-family: inherit;
   font-weight: bold;
   color: var(--white-1);
@@ -2119,7 +2139,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.card-back > button:hover {
   color: var(--primary);
   background: hsla(var(--hue), 25%, 10%, 0.2);
   border-color: currentColor;
@@ -2149,7 +2169,7 @@ button:hover {
   position: absolute;
 
   opacity: var(--op);
-  transition: 0.3s;
+  transition: 1s;
 }
 
 .design--1,
@@ -2225,7 +2245,7 @@ button:hover {
 }
 
 /* states */
-button:hover + .design-container {
+.card-back > button:hover + .design-container {
   --tr: 20;
   --op: 0.7;
 }
