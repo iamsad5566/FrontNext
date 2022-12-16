@@ -1,10 +1,12 @@
 import React from "react";
 
-const Card = (props) => {
-  const { showCategory, showing } = props;
-
+const CardInteract = (props) => {
+  const { width, height, size, showCategory, showing } = props;
   return (
-    <div className="flip-card-container">
+    <div
+      className="flip-card-container"
+      style={{ width: width, height: height }}
+    >
       <div className="flip-card">
         <div className="card-front">
           <figure>
@@ -13,14 +15,16 @@ const Card = (props) => {
               src="https://images.unsplash.com/photo-1545436864-cd9bdd1ddebc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
               alt="Image-3"
             />
-            <figcaption>Autumn</figcaption>
+            <figcaption style={{ fontSize: size * 0.8 + "em", padding: "0em" }}>
+              Autumn
+            </figcaption>
           </figure>
           <p
             style={{
               color: "white",
               fontFamily: "cursive",
-              fontSize: "1.2em",
-              paddingTop: "3em",
+              fontSize: size + "em",
+              paddingTop: size * 3 + "em",
             }}
           >
             {" "}
@@ -57,4 +61,4 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+export default CardInteract;

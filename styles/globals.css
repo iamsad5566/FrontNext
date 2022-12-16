@@ -1929,11 +1929,16 @@ header.masthead .post-heading .meta a {
   --dark: hsl(var(--hue), 25%, 10%);
   --grey: hsl(0, 0%, 50%);
 
-  width: 280px;
+  width: 300px;
   height: 450px;
   margin: 40px;
 
   perspective: 1000px;
+}
+
+.reverse-container {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .flip-card-container-s {
@@ -1944,11 +1949,14 @@ header.masthead .post-heading .meta a {
   --dark: hsl(var(--hue), 25%, 10%);
   --grey: hsl(0, 0%, 50%);
 
-  width: 280px;
+  width: 300px;
   height: 450px;
   margin: 40px;
 
   perspective: 1000px;
+
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .flip-card-container-f {
@@ -1959,9 +1967,12 @@ header.masthead .post-heading .meta a {
   --dark: hsl(var(--hue), 25%, 10%);
   --grey: hsl(0, 0%, 50%);
 
-  width: 280px;
+  width: 300px;
   height: 450px;
   margin: 40px;
+
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .flip-card-container-f .design-container {

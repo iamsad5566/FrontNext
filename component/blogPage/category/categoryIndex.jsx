@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Categories from "./categories";
-import Card from "./card";
+import CardInteract from "./cardInteract";
 import CardCategory from "./cardCategory";
 
 const CategoryIndex = (props) => {
@@ -94,7 +94,7 @@ const CategoryIndex = (props) => {
               textAlign: "left",
             }}
           >
-            <Card showCategory={showCategory} showing={showing} />
+            <CardInteract showCategory={showCategory} showing={showing} />
           </div>
           <div
             id="category"
