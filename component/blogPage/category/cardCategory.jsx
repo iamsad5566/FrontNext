@@ -2,7 +2,7 @@ import React from "react";
 import Categories from "./categories";
 
 const CardCategory = (props) => {
-  let { width, height, size, showing, handleCategoryByText } = props;
+  const { width, height, size, showing, handleCategoryByText } = props;
   let show = "flip-card-container-s";
   let fix = "flip-card-container-f";
   let key = 0;
@@ -12,7 +12,7 @@ const CardCategory = (props) => {
     <div className="reverse-container">
       <div
         className={showing ? show : fix}
-        style={{ width: width, height: height, zIndex: 3 }}
+        style={{ width: width + "px", height: height + "px", zIndex: 3 }}
       >
         <div className="flip-card">
           <div className="card-back">
@@ -34,7 +34,7 @@ const CardCategory = (props) => {
                 paddingTop: size * 1 + "em",
                 textAlign: "left",
                 marginLeft: -size + "em",
-                lineHeight: size * 1.5 + "em",
+                lineHeight: size * 1.2 + "em",
               }}
             >
               {categories.all.map((category) => {

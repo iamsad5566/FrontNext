@@ -5,7 +5,7 @@ const CardInteract = (props) => {
   return (
     <div
       className="flip-card-container"
-      style={{ width: width, height: height, zIndex: 3 }}
+      style={{ width: width + "px", height: height + "px", zIndex: 3 }}
     >
       <div className="flip-card">
         <div className="card-front">
@@ -24,7 +24,7 @@ const CardInteract = (props) => {
               color: "white",
               fontFamily: "cursive",
               fontSize: size + "em",
-              paddingTop: size * 3 + "em",
+              paddingTop: size * 1 + "em",
             }}
           >
             {" "}
@@ -41,7 +41,10 @@ const CardInteract = (props) => {
             />
           </figure>
 
-          <button onClick={() => showCategory()}>
+          <button
+            style={{ fontSize: size + "em", zIndex: 1 }}
+            onClick={() => showCategory()}
+          >
             {showing ? "Flip" : "Show"}
           </button>
 

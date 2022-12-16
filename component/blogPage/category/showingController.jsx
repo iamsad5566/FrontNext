@@ -9,8 +9,10 @@ const ShowingController = (props) => {
   );
 
   useEffect(() => {
+    let width = window.innerWidth;
+
     let autoSize = () => {
-      let width = window.innerWidth;
+      width = window.innerWidth;
       if (width < 1200) {
         setOutput(
           <Selecting
@@ -22,6 +24,8 @@ const ShowingController = (props) => {
         setOutput(<Card handleCategoryByText={handleCategoryByText} />);
       }
     };
+
+    autoSize();
 
     window.addEventListener("resize", autoSize);
 

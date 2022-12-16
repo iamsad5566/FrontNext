@@ -5,9 +5,9 @@ import Setting from "../../../setting";
 import BlogService from "../../api/BlogService";
 import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
-import Categories from "./categories";
+import Categories from "./category/categories";
 
-const UpdatePost = (props) => {
+const UpdatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");

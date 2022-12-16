@@ -1980,6 +1980,15 @@ header.masthead .post-heading .meta a {
   --op: 0.7;
 }
 
+.flip-card-container-s > .flip-card {
+  width: inherit;
+  height: inherit;
+
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 1s 0.5s;
+}
+
 /* .flip-card */
 .flip-card {
   width: inherit;
@@ -2160,7 +2169,7 @@ button:hover {
   position: absolute;
 
   opacity: var(--op);
-  transition: 0.3s;
+  transition: 1s;
 }
 
 .design--1,

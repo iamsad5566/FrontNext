@@ -5,7 +5,6 @@ import BlogService from "../../api/BlogService";
 import Loading from "../loading";
 import CookieParser from "../module/CookieParser";
 import BlogHeader from "./blogHeader";
-import CategoryIndex from "./category/categoryIndex";
 import ShowingController from "./category/showingController";
 import MainContent from "./mainContent";
 

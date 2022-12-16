@@ -5,8 +5,8 @@ import CardInteract from "./cardInteract";
 const Card = (props) => {
   const { handleCategoryByText } = props;
   const [showing, setShowing] = useState(false);
-  const [width, setWidth] = useState("300px");
-  const [height, setHeight] = useState("450px");
+  const [width, setWidth] = useState(300);
+  const [height, setHeight] = useState(450);
   const [size, setSize] = useState("1");
 
   const showCategory = () => {
@@ -21,38 +21,44 @@ const Card = (props) => {
   };
 
   useEffect(() => {
-    setWidth(innerWidth / 7 + "px");
-    setHeight((innerWidth * 1.6) / 7 + "px");
+    setWidth(innerWidth / 7);
+    setHeight((innerWidth * 1.6) / 7);
     setSize(innerWidth / 1500);
+    let FC = document.getElementById("floating-container");
+    let initialH = FC.getBoundingClientRect().top;
 
     let floating = () => {
-      let FC = document.getElementById("floating-container");
       if (FC == null) {
         return;
       }
-      if (window.scrollY > 400) {
-        FC.style.position = "fixed";
-        FC.style.top = window.innerHeight / 4 + "px";
-      } else {
-        FC.style.top = null;
+
+      let currTop = FC.getBoundingClientRect().top;
+      let horiz = innerHeight / 2;
+      let fixedAtCenter = horiz - height / 1.8;
+
+      if (scrollY < initialH - fixedAtCenter || currTop > fixedAtCenter) {
+        FC.style.top = initialH - scrollY + "px";
+      }
+
+      if (scrollY > initialH - fixedAtCenter) {
+        FC.style.top = fixedAtCenter + "px";
       }
     };
 
     let autoSize = () => {
-      let innerWidth = window.innerWidth;
-      setWidth(innerWidth / 7 + "px");
-      setHeight((innerWidth * 1.6) / 7 + "px");
+      setWidth(innerWidth / 7);
+      setHeight((innerWidth * 1.6) / 7);
       setSize(innerWidth / 1500);
     };
 
-    window.addEventListener("scroll", floating);
-    window.addEventListener("resize", autoSize);
-    window.addEventListener("resize", floating);
+    addEventListener("scroll", floating);
+    addEventListener("resize", autoSize);
+    addEventListener("resize", floating);
 
     return () => {
-      window.removeEventListener("scroll", floating);
-      window.removeEventListener("resize", floating);
-      window.removeEventListener("resize", autoSize);
+      removeEventListener("scroll", floating);
+      removeEventListener("resize", floating);
+      removeEventListener("resize", autoSize);
     };
   }, []);
   return (
