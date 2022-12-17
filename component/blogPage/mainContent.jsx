@@ -85,7 +85,7 @@ const MainContent = (props) => {
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div
               className="col-md-10 col-lg-8 col-xl-8"
-              style={{ textAlign: "left" }}
+              style={{ textAlign: "left", zIndex: 2 }}
             >
               {authenticationService.isLoggedIn() ? (
                 <Link href="/blog/add">

@@ -80,7 +80,7 @@ const UpdatePost = () => {
     fontFamily: "sans-serif",
     lineHeight: "1.15",
     width: "90%",
-    height: "60vh",
+    height: "auto",
     padding: "10px",
     display: "inline-block",
     textAlign: "justify",
@@ -163,7 +163,8 @@ const UpdatePost = () => {
           )}
           <div className="mdContainer" style={styleForMD}>
             <ReactMde
-              minEditorHeight={450}
+              initialEditorHeight={"60vh"}
+              minEditorHeight={"60vh"}
               value={content}
               onChange={setContent}
               selectedTab={selectedTab}

@@ -90,7 +90,8 @@ const MDEditor = (props) => {
         )}
         <div className="mdContainer" style={styleForMD}>
           <ReactMde
-            minEditorHeight={450}
+            initialEditorHeight={"60vh"}
+            minEditorHeight={"60vh"}
             value={value}
             onChange={setValue}
             selectedTab={selectedTab}
