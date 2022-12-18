@@ -2165,7 +2165,7 @@ figcaption {
 .design {
   display: block;
 
-  background: var(--grey);
+  background: rgba(225, 222, 222, 0.459);
   position: absolute;
 
   opacity: var(--op);
@@ -2176,7 +2176,7 @@ figcaption {
 .design--2,
 .design--3,
 .design--4 {
-  width: 1px;
+  width: 2px;
   height: 100%;
 }
 
@@ -2213,7 +2213,7 @@ figcaption {
 .design--7,
 .design--8 {
   width: 100%;
-  height: 1px;
+  height: 2px;
 }
 
 .design--5,
@@ -2257,4 +2257,20 @@ figcaption {
   color: hsla(0, 0%, 100%, 0.6);
   font-size: 16px;
   font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.iframe-container {
+  overflow: hidden;
+  /* 16:9 aspect ratio */
+  padding-top: 56.25%;
+  position: relative;
+  text-align: center;
+}
+.iframe-container iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }

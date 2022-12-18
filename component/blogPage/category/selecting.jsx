@@ -16,7 +16,7 @@ const Selecting = (props) => {
             width: "6em",
             textAlign: "center",
           }}
-          value={postCategory}
+          defaultValue={postCategory}
           onChange={(event) => handleCategory(event)}
         >
           {categories.all.map((category) => {
