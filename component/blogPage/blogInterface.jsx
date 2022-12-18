@@ -19,18 +19,10 @@ const BlogInterface = () => {
   const setting = new Setting();
 
   const handleCategory = (event) => {
-    if (postCategory === event.target.value) {
-      return;
-    }
-    setIsLoading(false);
     setPostCategory(event.target.value);
   };
 
   const handleCategoryByText = (txt) => {
-    if (txt === postCategory) {
-      return;
-    }
-    setIsLoading(false);
     setPostCategory(txt);
   };
 
@@ -53,6 +45,7 @@ const BlogInterface = () => {
 
   useEffect(() => {
     let visited = CookieParser.hasVisited(document.cookie, "blog");
+    setIsLoading(false);
     if (authenticationService.isLoggedIn()) {
       document.cookie = "blog=visited; max-age=86400; path=/";
       let token = sessionStorage.getItem(setting.admin);
