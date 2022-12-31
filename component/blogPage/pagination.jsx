@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
 
 const Pagination = (props) => {
@@ -21,6 +21,169 @@ const Pagination = (props) => {
     return /^-?\d+$/.test(value);
   };
 
+  const flattenLayout = () => {
+    return pages.map((page) => (
+      <li
+        key={page}
+        className={page === currentPage ? "page-item active" : "page-item"}
+      >
+        <button className="page-link" onClick={() => handlePageChange(page)}>
+          {page}
+        </button>
+      </li>
+    ));
+  };
+
+  const zipLayout = (currentPage) => {
+    if (currentPage >= len - 1) {
+      return (
+        <React.Fragment>
+          <li key={1} className="page-item">
+            <button className="page-link" onClick={() => handlePageChange(1)}>
+              {1}
+            </button>
+          </li>
+          <li key={2} className="page-item">
+            <button className="page-link" onClick={() => handlePageChange(2)}>
+              {2}
+            </button>
+          </li>
+          <li key={3} className="page-item">
+            <button className="page-link" onClick={() => handlePageChange(3)}>
+              {3}
+            </button>
+          </li>
+          <span className="page-link">......</span>
+          <li
+            key={len - 1}
+            className={
+              len - 1 === currentPage ? "page-item active" : "page-item"
+            }
+          >
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(len - 1)}
+            >
+              {len - 1}
+            </button>
+          </li>
+          <li
+            key={len}
+            className={len === currentPage ? "page-item active" : "page-item"}
+          >
+            <button className="page-link" onClick={() => handlePageChange(len)}>
+              {len}
+            </button>
+          </li>
+        </React.Fragment>
+      );
+    } else if (currentPage === len - 2) {
+      return (
+        <React.Fragment>
+          <li key={1} className="page-item">
+            <button className="page-link" onClick={() => handlePageChange(1)}>
+              {1}
+            </button>
+          </li>
+          <li key={2} className="page-item">
+            <button className="page-link" onClick={() => handlePageChange(2)}>
+              {2}
+            </button>
+          </li>
+          <span className="page-link">......</span>
+          <li key={currentPage} className="page-item active">
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(currentPage)}
+            >
+              {currentPage}
+            </button>
+          </li>
+          <li key={currentPage + 1} className="page-item">
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              {currentPage + 1}
+            </button>
+          </li>
+          <li key={currentPage + 2} className="page-item">
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(currentPage + 2)}
+            >
+              {currentPage + 2}
+            </button>
+          </li>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          {currentPage === 1 ? (
+            <></>
+          ) : (
+            <li key={currentPage - 1} className="page-item">
+              <button
+                className="page-link"
+                onClick={() => handlePageChange(currentPage - 1)}
+              >
+                {currentPage - 1}
+              </button>
+            </li>
+          )}
+
+          <li key={currentPage} className="page-item active">
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(currentPage)}
+            >
+              {currentPage}
+            </button>
+          </li>
+          <li key={currentPage + 1} className="page-item">
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              {currentPage + 1}
+            </button>
+          </li>
+          {currentPage === 1 ? (
+            <li key={currentPage + 2} className="page-item">
+              <button
+                className="page-link"
+                onClick={() => handlePageChange(currentPage + 2)}
+              >
+                {currentPage + 2}
+              </button>
+            </li>
+          ) : (
+            <></>
+          )}
+          <span className="page-link">......</span>
+          <li key={len - 1} className="page-item">
+            <button
+              className="page-link"
+              onClick={() => handlePageChange(len - 1)}
+            >
+              {len - 1}
+            </button>
+          </li>
+          <li key={len} className="page-item">
+            <button className="page-link" onClick={() => handlePageChange(len)}>
+              {len}
+            </button>
+          </li>
+        </React.Fragment>
+      );
+    }
+  };
+
+  useEffect(() => {
+    setInputPage("");
+  }, [currentPage]);
+
   return (
     <div style={{ textAlign: "center" }}>
       <nav
@@ -37,138 +200,7 @@ const Pagination = (props) => {
               <span aria-hidden="true">&laquo;</span>
             </button>
           </li>
-          {pages.length < 7 ? (
-            pages.map((page) => (
-              <li
-                key={page}
-                className={
-                  page === currentPage ? "page-item active" : "page-item"
-                }
-              >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(page)}
-                >
-                  {page}
-                </button>
-              </li>
-            ))
-          ) : currentPage >= len - 1 ? (
-            <React.Fragment>
-              <li key={1} className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(1)}
-                >
-                  {1}
-                </button>
-              </li>
-              <li key={2} className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(2)}
-                >
-                  {2}
-                </button>
-              </li>
-              <li key={3} className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(3)}
-                >
-                  {3}
-                </button>
-              </li>
-              <span className="page-link">......</span>
-              <li
-                key={len - 1}
-                className={
-                  len - 1 === currentPage ? "page-item active" : "page-item"
-                }
-              >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(len - 1)}
-                >
-                  {len - 1}
-                </button>
-              </li>
-              <li
-                key={len}
-                className={
-                  len === currentPage ? "page-item active" : "page-item"
-                }
-              >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(len)}
-                >
-                  {len}
-                </button>
-              </li>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              {currentPage === 1 ? (
-                <></>
-              ) : (
-                <li key={currentPage - 1} className="page-item">
-                  <button
-                    className="page-link"
-                    onClick={() => handlePageChange(currentPage - 1)}
-                  >
-                    {currentPage - 1}
-                  </button>
-                </li>
-              )}
-
-              <li key={currentPage} className="page-item active">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(currentPage)}
-                >
-                  {currentPage}
-                </button>
-              </li>
-              <li key={currentPage + 1} className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                >
-                  {currentPage + 1}
-                </button>
-              </li>
-              {currentPage === 1 ? (
-                <li key={currentPage + 2} className="page-item">
-                  <button
-                    className="page-link"
-                    onClick={() => handlePageChange(currentPage + 2)}
-                  >
-                    {currentPage + 2}
-                  </button>
-                </li>
-              ) : (
-                <></>
-              )}
-              <span className="page-link">......</span>
-              <li key={len - 1} className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(len - 1)}
-                >
-                  {len - 1}
-                </button>
-              </li>
-              <li key={len} className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(len)}
-                >
-                  {len}
-                </button>
-              </li>
-            </React.Fragment>
-          )}
+          {pages.length < 6 ? flattenLayout() : zipLayout(currentPage)}
 
           <li className="page-item">
             <button
@@ -200,23 +232,30 @@ const Pagination = (props) => {
             }}
             onKeyDown={(event) => {
               if (
-                event.code === "Enter" &&
+                (event.code === "Enter" || event.key === "Enter") &&
                 isNumeric(inputPage) &&
                 inputPage <= pagesCount
               ) {
                 handlePageChange(parseInt(inputPage, 10));
               }
 
-              if (event.code === "Enter" && !isNumeric(inputPage)) {
+              if (
+                (event.code === "Enter" || event.key === "Enter") &&
+                !isNumeric(inputPage)
+              ) {
                 alert("Please input a number!");
                 return;
               }
 
-              if (event.code === "Enter" && inputPage > pagesCount) {
+              if (
+                (event.code === "Enter" || event.key === "Enter") &&
+                inputPage > pagesCount
+              ) {
                 alert("Do not have so many pages!");
                 return;
               }
             }}
+            autoComplete="off"
           />
         </ul>
       </nav>
