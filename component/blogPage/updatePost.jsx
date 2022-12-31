@@ -91,6 +91,7 @@ const UpdatePost = () => {
     blogService.getSingleArticle(postID, true).then((response) => {
       setTitle(response.data.title);
       setContent(response.data.content);
+      setCategory(response.data.category);
     });
   }, []);
 

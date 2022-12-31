@@ -4,9 +4,7 @@ import Selecting from "./selecting";
 
 const ShowingController = (props) => {
   const { handleCategory, postCategory, handleCategoryByText } = props;
-  let [output, setOutput] = useState(
-    <Card handleCategoryByText={handleCategoryByText} />
-  );
+  let [output, setOutput] = useState();
 
   useEffect(() => {
     let width = window.innerWidth;
