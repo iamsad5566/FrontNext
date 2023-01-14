@@ -28,15 +28,17 @@ const BlogInterface = () => {
 
   function getRows(visited) {
     blogService
-      .getRowsByCategory(postCategory, visited)
+      .getBlogBrowse()
       .then((response) => {
-        setRowsForEachCategory(response.data);
+        setTodayBrowseTimes(response.data[0]);
+        setTotalBrowseTimes(response.data[1]);
       })
       .then(
-        blogService.getBlogBrowse().then((response) => {
-          setTodayBrowseTimes(response.data[0]);
-          setTotalBrowseTimes(response.data[1]);
-        })
+        blogService
+          .getRowsByCategory(postCategory, visited)
+          .then((response) => {
+            setRowsForEachCategory(response.data);
+          })
       )
       .then(() => {
         setIsLoading(true);
