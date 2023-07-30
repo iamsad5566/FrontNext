@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import BlogInterface from "../../component/blogPage/blogInterface";
 import NavBar from "../../component/navbar";
+import AuthenticationService from "../../api/AuthenticationService";
 
 const Blog = () => {
   return (
@@ -24,3 +25,21 @@ const Blog = () => {
 };
 
 export default Blog;
+
+export const getPostData = async (id) => {
+  let authenticationService = new AuthenticationService();
+  let token = "";
+  await authenticationService.login("guest", "guest").then((response) => {
+    token = authenticationService.createToken(response.data.token);
+  });
+
+  const res = await fetch(
+    `https://tw-yk.website:81/article/getSingleArticle/${id}?visited=true`,
+    {
+      headers: { Authorization: token },
+    }
+  );
+
+  const article = await res.json();
+  return article;
+}

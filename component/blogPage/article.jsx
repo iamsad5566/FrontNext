@@ -14,6 +14,7 @@ const Article = (props) => {
   let setting = new Setting();
   let blogService = new BlogService();
   let authenticationService = new AuthenticationService();
+  console.log(postId)
 
   const handleDelete = (postId) => {
     if (window.confirm("Are you sure to delete it?")) {
