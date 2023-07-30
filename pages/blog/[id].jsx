@@ -6,10 +6,10 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import AuthenticationService from "../../api/AuthenticationService";
 import Head from "next/head";
-import { getPostData } from "../../component/blogPage/mainContent";
 import BlogService from "../../api/BlogService";
 import Setting from "../../../setting";
 import CookieParser from "../../component/module/CookieParser";
+import { getPostData } from ".";
 
 const Post = (props) => {
   let router = useRouter();
@@ -17,7 +17,8 @@ const Post = (props) => {
   let title;
   let content;
   let date;
-  if (!router.isFallback) {
+
+  if(!router.isFallback) {
     id = props.params.id;
     title = props.article.title;
     content = props.article.content;
@@ -162,7 +163,7 @@ const Post = (props) => {
 
 export default Post;
 
-export const getStaticPaths = () => {
+export const getStaticPaths = async () => {
   let idArr = [
     "12",
     "13",
@@ -170,6 +171,7 @@ export const getStaticPaths = () => {
     "16",
     "17",
     "18",
+    "19",
     "20",
     "22",
     "23",
@@ -178,18 +180,41 @@ export const getStaticPaths = () => {
     "26",
     "27",
     "29",
+    "34",
+    "35",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
     "42",
     "43",
+    "44",
+    "45",
+    "46",
+    "51",
+    "52",
+    "53",
+    "54",
+    "55",
+    "56",
+    "57",
+    "58",
+    "59",
+    "60",
   ];
+
+  let pathList =  idArr.map((m) => {
+    return { params: { id: m } };
+  })
+
   return {
-    paths: idArr.map((m) => {
-      return { params: { id: m } };
-    }),
-    fallback: true,
+    paths: pathList,
+    fallback: "blocking",
   };
 };
 
-export async function getStaticProps({ params }) {
+export const getStaticProps = async ({ params }) => {
   const article = await getPostData(params.id);
   return {
     props: {
