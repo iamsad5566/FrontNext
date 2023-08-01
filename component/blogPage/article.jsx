@@ -4,6 +4,8 @@ import ReactMarkdown from "react-markdown";
 import Setting from "../../../setting";
 import AuthenticationService from "../../api/AuthenticationService";
 import BlogService from "../../api/BlogService";
+import rehypeRaw from 'rehype-raw'
+import { useRouter } from "next/router";
 
 const Article = (props) => {
   const { title, content, date, postId } = props;
@@ -11,6 +13,7 @@ const Article = (props) => {
   const [articleAllBrowse, setArticleAllBrowse] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
 
+  let router = useRouter()
   let setting = new Setting();
   let blogService = new BlogService();
   let authenticationService = new AuthenticationService();
@@ -44,7 +47,7 @@ const Article = (props) => {
         className="post-preview"
         style={{ margin: "2em 0em", position: "relative" }}
       >
-        <Link legacyBehavior href={`/blog/${postId}`}>
+        <Link legacyBehavior href={`/blog/${postId}`} target="_blank" rel="noreferrer">
           <span id="articleContainer">
             <h1 className="post-title">{title}</h1>
             <span
@@ -55,7 +58,7 @@ const Article = (props) => {
                 textAlign: "justify",
               }}
             >
-              <ReactMarkdown>{content}</ReactMarkdown>
+              <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
             </span>
           </span>
         </Link>

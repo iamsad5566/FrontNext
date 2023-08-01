@@ -1,5 +1,5 @@
 class Categories {
-  all = ["All", "Literature", "LeetCode", "Vent", "Other"];
+  all = ["All", "Literature", "LeetCode", "Vent"];
 }
 
 export default Categories;
