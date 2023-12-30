@@ -51,6 +51,11 @@ const OtherMainContent = () => {
                 <a className="other-title"> Gmail postman </a>
               </Link>
             </li>
+            <li style={{ padding: "1em 0em" }}>
+              <Link legacyBehavior href={prefix + "/restaurant"}>
+                <a className="other-title"> Restaurant developing </a>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
