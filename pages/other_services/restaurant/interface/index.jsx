@@ -1,7 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import NavBar from "../../../component/navbar";
-import LoginComponent from "../../../component/otherPage/restaurant/login_component";
+import NavBar from "../../../../component/navbar";
 
 const RestaurantInterface = () => {
   return (
@@ -24,7 +23,6 @@ const RestaurantInterface = () => {
         <link rel="icon" href="/mailCat.ico" type="image/x-icon" />
       </Head>
       <NavBar />
-      <LoginComponent />
     </React.Fragment>
   );
 };

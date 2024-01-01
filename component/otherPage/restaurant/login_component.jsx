@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/router";
+import RestaurantService from "../../../api/RestaurantService";
 
 const LoginComponent = () => {
   const router = useRouter();
@@ -28,11 +29,20 @@ const LoginComponent = () => {
     }
   };
 
-  const handleClick = (event) => {
-    // setLoginFailed(true);
-    setShowMessage(true);
+  const handleClick = async () => {
     setTimer(3);
+    let restaurantService = new RestaurantService();
+    let loggedIn = await restaurantService.login(info.userName, info.password);
+    console.log(loggedIn);
+    if (loggedIn == true) {
+      setShowMessage(true);
+      handlRedirect();
+    } else {
+      setLoginFailed(true);
+    }
+  };
 
+  const handlRedirect = () => {
     let counter = 3;
     const countdown = setInterval(() => {
       setTimer((prevTimer) => prevTimer - 1);
@@ -40,7 +50,7 @@ const LoginComponent = () => {
       if (counter == 0) {
         clearInterval(countdown);
         setTimeout(() => {
-          router.push("/other_services");
+          router.push("./restaurant/interface");
         }, 500);
       }
     }, 1000);
