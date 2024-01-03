@@ -23,6 +23,23 @@ class RestaurantService {
     }
     return false;
   };
+
+  insert = async (data) => {
+    let response = await axios
+      .post("https://tw-yk.website:888/restaurant/insert_new", data, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("restaurantToken")}`,
+        },
+      })
+      .catch((e) => {
+        console.log(e);
+        return false;
+      });
+    if (response.status == 200) {
+      return true;
+    }
+    return false;
+  };
 }
 
 export default RestaurantService;
