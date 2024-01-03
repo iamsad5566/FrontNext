@@ -22,6 +22,10 @@ const RestaurantInterface = () => {
         <meta property="fb:admins" content="153906327962277" />
         <meta property="og:image" content="https://tw-yk.com/hermes.png" />
         <link rel="icon" href="/mailCat.ico" type="image/x-icon" />
+        <script
+          src="https://kit.fontawesome.com/a076d05399.js"
+          crossorigin="anonymous"
+        ></script>
       </Head>
       <NavBar />
       <LoginComponent />
