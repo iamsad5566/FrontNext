@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import NavBar from "../../../../component/navbar";
+import RestaurantController from "../../../../component/otherPage/restaurant/interface/restaurant_controller";
 
 const RestaurantInterface = () => {
   return (
@@ -9,7 +10,7 @@ const RestaurantInterface = () => {
         <title>restaurant</title>
         <meta
           property="og:url"
-          content="https://tw-yk.com/other_services/restaurant"
+          content="https://tw-yk.com/other_services/restaurant/interface"
         />
         <meta property="og:locale" content="en_US" />
         <meta
@@ -23,6 +24,7 @@ const RestaurantInterface = () => {
         <link rel="icon" href="/mailCat.ico" type="image/x-icon" />
       </Head>
       <NavBar />
+      <RestaurantController />
     </React.Fragment>
   );
 };
