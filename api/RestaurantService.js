@@ -58,15 +58,13 @@ class RestaurantService {
   };
 
   removeOne = async (data) => {
-    return axios.delete(
-      "https://tw-yk.website:888/restaurant/delete_by_name",
-      { name: data.name },
-      {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("restaurantToken")}`,
-        },
-      }
-    );
+    console.log(sessionStorage.getItem("restaurantToken"));
+    return axios.delete("https://tw-yk.website:888/restaurant/delete_by_name", {
+      data: { name: data.name },
+      headers: {
+        Authorization: sessionStorage.getItem("restaurantToken"),
+      },
+    });
   };
 }
 
