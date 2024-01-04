@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/router";
 import RestaurantService from "../../../api/RestaurantService";
@@ -33,7 +33,6 @@ const LoginComponent = () => {
     setTimer(3);
     let restaurantService = new RestaurantService();
     let loggedIn = await restaurantService.login(info.userName, info.password);
-    console.log(loggedIn);
     if (loggedIn == true) {
       setShowMessage(true);
       handlRedirect();

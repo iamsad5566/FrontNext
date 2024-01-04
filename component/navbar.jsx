@@ -14,10 +14,12 @@ const NavBar = () => {
         <Script
           src="https://kit.fontawesome.com/a076d05399.js"
           strategy="lazyOnload"
+          defer
         />
         <Script
           src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"
           strategy="beforeInteractive"
+          defer
         />
       </Head>
 

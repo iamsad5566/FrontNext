@@ -23,6 +23,45 @@ class RestaurantService {
     }
     return false;
   };
+
+  insert = async (data) => {
+    let response = await axios
+      .post("https://tw-yk.website:888/restaurant/insert_new", data, {
+        headers: {
+          Authorization: sessionStorage.getItem("restaurantToken"),
+        },
+      })
+      .catch((e) => {
+        console.log(e);
+        return false;
+      });
+    if (response.status == 200) {
+      return true;
+    }
+    return false;
+  };
+
+  getOne = async (data) => {
+    return axios.post(
+      "https://tw-yk.website:888/restaurant/get_by_name",
+      { name: data.name },
+      {
+        headers: {
+          Authorization: sessionStorage.getItem("restaurantToken"),
+        },
+      }
+    );
+  };
+
+  removeOne = async (data) => {
+    console.log(sessionStorage.getItem("restaurantToken"));
+    return axios.delete("https://tw-yk.website:888/restaurant/delete_by_name", {
+      data: { name: data.name },
+      headers: {
+        Authorization: sessionStorage.getItem("restaurantToken"),
+      },
+    });
+  };
 }
 
 export default RestaurantService;

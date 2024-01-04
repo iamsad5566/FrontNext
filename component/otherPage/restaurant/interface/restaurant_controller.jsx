@@ -20,7 +20,7 @@ const RestaurantController = () => {
     } else {
       setProcessiong(false);
     }
-  }, []);
+  }, [processiong]);
 
   return (
     <React.Fragment>
