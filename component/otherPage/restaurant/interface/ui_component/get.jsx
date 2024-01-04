@@ -98,13 +98,13 @@ const Get = ({ cacheRestaurant, handleCache, handleSearch, handleDelete }) => {
                       評論:
                     </p>{" "}
                   </span>
-                  <span style={{ width: "90%" }}>
+                  <ol style={{ width: "90%", marginTop: "0.05em" }}>
                     {e.comments.map((text) => (
-                      <div key={k++} style={{ marginBottom: "0.5em" }}>
+                      <li key={k++}>
                         <p>{text}</p>
-                      </div>
+                      </li>
                     ))}
-                  </span>
+                  </ol>
                 </div>
 
                 <div style={{ marginTop: "1em", display: "flex" }}>
@@ -157,15 +157,15 @@ const Get = ({ cacheRestaurant, handleCache, handleSearch, handleDelete }) => {
           </div>
           <div style={{ marginTop: "1.5em" }}>
             <button
+              className="btn btn-danger"
               type="button"
               style={{
                 fontSize: "1.2em",
-                color: "white",
-                backgroundColor: "#E42217",
+                width: "5em",
               }}
               onClick={() => handleDelete(cacheRestaurant)}
             >
-              刪除
+              <span>刪除</span>
             </button>
           </div>
         </div>
