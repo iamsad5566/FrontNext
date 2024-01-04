@@ -26,15 +26,11 @@ class RestaurantService {
 
   insert = async (data) => {
     let response = await axios
-      .post(
-        "https://tw-yk.website:888/restaurant/insert_new",
-        { name: data.name },
-        {
-          headers: {
-            Authorization: sessionStorage.getItem("restaurantToken"),
-          },
-        }
-      )
+      .post("https://tw-yk.website:888/restaurant/insert_new", data, {
+        headers: {
+          Authorization: sessionStorage.getItem("restaurantToken"),
+        },
+      })
       .catch((e) => {
         console.log(e);
         return false;

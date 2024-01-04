@@ -108,16 +108,16 @@ const RestaurantUI = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = {
-      name: e.target[2].value,
+      name: formData.name,
       latlng: {
-        x: parseFloat(e.target[3].value),
-        y: parseFloat(e.target[4].value),
+        x: parseFloat(formData.lng),
+        y: parseFloat(formData.lat),
       },
-      stars: parseFloat(e.target[5].value),
+      stars: parseFloat(formData.stars),
       comments: commentList,
       pictures: urlList,
       types: types,
-      hours: hours,
+      hours: formData.hours,
     };
     if (data.name == "") {
       alert("name can't be empty");
@@ -141,18 +141,18 @@ const RestaurantUI = () => {
       alert("餐廳類別 can't be empty");
       return;
     } else if (
-      hours.Monday == "" ||
-      hours.Tuesday == "" ||
-      hours.Wednesday == "" ||
-      hours.Thursday == "" ||
-      hours.Friday == "" ||
-      hours.Saturday == "" ||
-      hours.Sunday == ""
+      formData.hours.Monday == "" ||
+      formData.hours.Tuesday == "" ||
+      formData.hours.Wednesday == "" ||
+      formData.hours.Thursday == "" ||
+      formData.hours.Friday == "" ||
+      formData.hours.Saturday == "" ||
+      formData.hours.Sunday == ""
     ) {
       alert("請檢查營業時間");
       return;
     }
-
+    console.log(data);
     let saved = await restaurantService.insert(data);
     if (saved) {
       alert("done!");
