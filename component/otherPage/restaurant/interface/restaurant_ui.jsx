@@ -156,6 +156,7 @@ const RestaurantUI = () => {
     let saved = await restaurantService.insert(data);
     if (saved) {
       alert("done!");
+      document.location.reload();
     } else {
       alert("error!");
     }
