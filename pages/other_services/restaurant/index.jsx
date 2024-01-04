@@ -25,6 +25,7 @@ const RestaurantInterface = () => {
         <script
           src="https://kit.fontawesome.com/a076d05399.js"
           crossorigin="anonymous"
+          defer
         ></script>
       </Head>
       <NavBar />
