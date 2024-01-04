@@ -27,39 +27,48 @@ const Insert = ({
         />
       </label>
       <div style={{ display: "flex" }}>
-        <label>
-          經度:
-          <input
-            name="lng"
-            placeholder="GisX"
-            value={formData.lng}
-            style={{ width: "90%" }}
-            autoComplete="off"
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label>
-          緯度:
-          <input
-            name="lat"
-            placeholder="GisY"
-            value={formData.lat}
-            style={{ width: "90%" }}
-            autoComplete="off"
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label>
-          星星數:
-          <input
-            placeholder="Stars"
-            style={{ width: "90%" }}
-            autoComplete="off"
-          />
-        </label>
+        <div style={{ display: "block", width: "32%" }}>
+          <div>經度:</div>
+          <div>
+            <input
+              name="lng"
+              placeholder="GisX"
+              value={formData.lng}
+              style={{ marginLeft: "1em", width: "60%" }}
+              autoComplete="off"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
+        <div style={{ display: "block", width: "32%" }}>
+          <div>緯度:</div>
+          <div>
+            <input
+              name="lat"
+              placeholder="GisY"
+              value={formData.lat}
+              style={{ marginLeft: "1em", width: "60%" }}
+              autoComplete="off"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
+        <div style={{ display: "block", width: "32%" }}>
+          <div>星星數:</div>
+          <div>
+            <input
+              name="stars"
+              placeholder="Stars"
+              value={formData.stars}
+              style={{ marginLeft: "1em", width: "60%" }}
+              autoComplete="off"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
       </div>
 
-      <div style={{ display: "flex", marginTop: "1em" }}>
+      <div style={{ display: "flex", marginTop: "5em" }}>
         <span style={{ width: "25%", marginTop: "1em" }}>
           <button
             className="unit"
