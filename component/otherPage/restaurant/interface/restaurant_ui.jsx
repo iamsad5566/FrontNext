@@ -1,24 +1,35 @@
 import React, { useState } from "react";
 import RestaurantService from "../../../../api/RestaurantService";
+import Insert from "./ui_component/insert";
+import Get from "./ui_component/get";
 
 const RestaurantUI = () => {
+  let restaurantService = new RestaurantService();
+  const [currentSession, setSession] = useState("insert");
   const [commentList, setCommentList] = useState([]);
   const [urlList, setUrlList] = useState([]);
   const [types, setTypes] = useState([]);
-  const [hours, setHours] = useState({
-    Monday: "",
-    Tuesday: "",
-    Wednesday: "",
-    Thursday: "",
-    Friday: "",
-    Saturday: "",
-    Sunday: "",
+
+  const [formData, setFormData] = useState({
+    name: "",
+    lat: "",
+    lng: "",
+    stars: "",
+    hours: {
+      Monday: "",
+      Tuesday: "",
+      Wednesday: "",
+      Thursday: "",
+      Friday: "",
+      Saturday: "",
+      Sunday: "",
+    },
   });
 
-  const commentStyle = {
-    marginTop: "1em",
-    width: "80%",
-  };
+  const [cacheRestaurant, setCacheRestaurant] = useState({
+    name: "",
+    data: [],
+  });
 
   const styleForContainer = {
     width: "100%",
@@ -28,6 +39,32 @@ const RestaurantUI = () => {
     alignItems: "center",
     justifyContent: "center",
     padding: "2em",
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handlehours = (day, value) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      hours: {
+        ...prevFormData.hours,
+        [day]: value,
+      },
+    }));
+  };
+
+  const handleCache = (e) => {
+    const { name, value } = e.target;
+    setCacheRestaurant((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handlePlus = (list) => {
@@ -62,6 +99,10 @@ const RestaurantUI = () => {
     } else if (list == types) {
       setTypes(updatedList);
     }
+  };
+
+  const handleSwitch = (event) => {
+    setSession(event.target.name);
   };
 
   const handleSubmit = async (e) => {
@@ -111,13 +152,47 @@ const RestaurantUI = () => {
       alert("請檢查營業時間");
       return;
     }
-    let restaurantService = new RestaurantService();
+
     let saved = await restaurantService.insert(data);
     if (saved) {
       alert("done!");
-      window.location.reload();
     } else {
       alert("error!");
+    }
+  };
+
+  const handleSearch = (data) => {
+    restaurantService
+      .getOne(data)
+      .then((response) => {
+        if (response.status == 200) {
+          setCacheRestaurant((prev) => ({
+            ...prev,
+            data: response.data.result,
+          }));
+          if (response.data.result.length == 0) {
+            alert("No data");
+          }
+        }
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  };
+
+  const handleDelete = (data) => {
+    if (confirm("sure?")) {
+      restaurantService
+        .removeOne(data)
+        .then(
+          setCacheRestaurant((prev) => ({
+            ...prev,
+            data: [],
+          }))
+        )
+        .catch((e) => {
+          alert(e);
+        });
     }
   };
 
@@ -128,255 +203,53 @@ const RestaurantUI = () => {
           <div className="segment">
             <div style={{ display: "flex" }}>
               <span style={{ width: "50%" }}>
-                <button style={{ width: "90%" }}> Insert </button>
+                <button
+                  type="button"
+                  name="insert"
+                  style={{ width: "90%" }}
+                  onClick={(e) => {
+                    handleSwitch(e);
+                  }}
+                >
+                  {" "}
+                  Insert{" "}
+                </button>
               </span>
               <span style={{ width: "50%" }}>
-                <button style={{ width: "90%" }}> Get </button>
+                <button
+                  type="button"
+                  name="get"
+                  style={{ width: "90%" }}
+                  onClick={(e) => {
+                    handleSwitch(e);
+                  }}
+                >
+                  {" "}
+                  Get{" "}
+                </button>
               </span>
             </div>
           </div>
-
-          <label>
-            <input name="restaurantName" placeholder="餐廳名稱" />
-          </label>
-          <div style={{ display: "flex" }}>
-            <label>
-              經度:
-              <input placeholder="GisX" style={{ width: "90%" }} />
-            </label>
-            <label>
-              緯度:
-              <input placeholder="GisY" style={{ width: "90%" }} />
-            </label>
-            <label>
-              星星數:
-              <input placeholder="Stars" style={{ width: "90%" }} />
-            </label>
-          </div>
-
-          <div style={{ display: "flex", marginTop: "1em" }}>
-            <span style={{ width: "25%", marginTop: "1em" }}>
-              <button
-                className="unit"
-                type="button"
-                onClick={() => {
-                  handlePlus(commentList);
-                }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </button>
-            </span>
-            <span style={{ width: "70%" }}>
-              {commentList.length > 0 ? (
-                <div>
-                  {commentList.map((comment, index) => (
-                    <span key={index}>
-                      <input
-                        placeholder="請輸入評論"
-                        style={commentStyle}
-                        value={comment}
-                        onChange={(e) =>
-                          handleUpdate(commentList, index, e.target.value)
-                        }
-                      />
-                      <button
-                        className="unit"
-                        type="button"
-                        onClick={() => handleRemove(commentList, index)}
-                      >
-                        <i className="fa-solid fa-minus"></i>
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p style={{ marginTop: "2em" }}>點擊 ＋ 新增評論</p>
-              )}
-            </span>
-          </div>
-
-          <div style={{ display: "flex", marginTop: "3em" }}>
-            <span style={{ width: "25%", marginTop: "1em" }}>
-              <button
-                className="unit"
-                type="button"
-                onClick={() => {
-                  handlePlus(urlList);
-                }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </button>
-            </span>
-            <span style={{ width: "70%" }}>
-              {urlList.length > 0 ? (
-                <div>
-                  {urlList.map((url, index) => (
-                    <span key={index}>
-                      <input
-                        placeholder="請輸入 URL"
-                        style={commentStyle}
-                        value={url}
-                        onChange={(e) =>
-                          handleUpdate(urlList, index, e.target.value)
-                        }
-                      />
-                      <button
-                        className="unit"
-                        type="button"
-                        onClick={() => handleRemove(urlList, index)}
-                      >
-                        <i className="fa-solid fa-minus"></i>
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p style={{ marginTop: "2em" }}>點擊 ＋ 新增照片 URL </p>
-              )}
-            </span>
-          </div>
-
-          <div style={{ display: "flex", marginTop: "3em" }}>
-            <span style={{ width: "25%", marginTop: "1em" }}>
-              <button
-                className="unit"
-                type="button"
-                onClick={() => {
-                  handlePlus(types);
-                }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </button>
-            </span>
-            <span style={{ width: "70%" }}>
-              {types.length > 0 ? (
-                <div>
-                  {types.map((type, index) => (
-                    <span key={index}>
-                      <input
-                        placeholder="請輸入餐廳類別"
-                        style={commentStyle}
-                        value={type}
-                        onChange={(e) =>
-                          handleUpdate(types, index, e.target.value)
-                        }
-                      />
-                      <button
-                        className="unit"
-                        type="button"
-                        onClick={() => handleRemove(types, index)}
-                      >
-                        <i className="fa-solid fa-minus"></i>
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p style={{ marginTop: "2em" }}>點擊 ＋ 新增餐廳類別 </p>
-              )}
-            </span>
-          </div>
-          <label style={{ marginTop: "5em" }}>
-            {" "}
-            <h3>營業時間</h3>
-            <div style={{ display: "flex", marginTop: "2em" }}>
-              <label>
-                週一:
-                <input
-                  placeholder="5:30–10:30 PM"
-                  style={{ width: "90%" }}
-                  onChange={(event) => {
-                    setHours((hours) => {
-                      hours.Monday = event.target.value;
-                      return hours;
-                    });
-                  }}
-                />
-              </label>
-              <label>
-                週二:
-                <input
-                  placeholder="5:30–10:30 PM"
-                  style={{ width: "90%" }}
-                  onChange={(event) => {
-                    setHours((hours) => {
-                      hours.Tuesday = event.target.value;
-                      return hours;
-                    });
-                  }}
-                />
-              </label>
-              <label>
-                週三:
-                <input
-                  placeholder="5:30–10:30 PM"
-                  style={{ width: "90%" }}
-                  onChange={(event) => {
-                    setHours((hours) => {
-                      hours.Wednesday = event.target.value;
-                      return hours;
-                    });
-                  }}
-                />
-              </label>
-              <label>
-                週四:
-                <input
-                  placeholder="5:30–10:30 PM"
-                  style={{ width: "90%" }}
-                  onChange={(event) => {
-                    setHours((hours) => {
-                      hours.Thursday = event.target.value;
-                      return hours;
-                    });
-                  }}
-                />
-              </label>
-              <label>
-                週五:
-                <input
-                  placeholder="5:30–10:30 PM"
-                  style={{ width: "90%" }}
-                  onChange={(event) => {
-                    setHours((hours) => {
-                      hours.Friday = event.target.value;
-                      return hours;
-                    });
-                  }}
-                />
-              </label>
-              <label>
-                週六:
-                <input
-                  placeholder="5:30–10:30 PM"
-                  style={{ width: "90%" }}
-                  onChange={(event) => {
-                    setHours((hours) => {
-                      hours.Saturday = event.target.value;
-                      return hours;
-                    });
-                  }}
-                />
-              </label>
-              <label>
-                週日:
-                <input
-                  placeholder="5:30–10:30 PM"
-                  style={{ width: "90%" }}
-                  onChange={(event) => {
-                    setHours((hours) => {
-                      hours.Sunday = event.target.value;
-                      return hours;
-                    });
-                  }}
-                />
-              </label>
-            </div>
-          </label>
-
-          <button className="red" type="submit">
-            <i className="fas fa-cloud"></i> Save
-          </button>
+          {currentSession == "insert" ? (
+            <Insert
+              commentList={commentList}
+              urlList={urlList}
+              types={types}
+              handlePlus={handlePlus}
+              handleRemove={handleRemove}
+              handleUpdate={handleUpdate}
+              formData={formData}
+              handleChange={handleChange}
+              handlehours={handlehours}
+            />
+          ) : (
+            <Get
+              cacheRestaurant={cacheRestaurant}
+              handleCache={handleCache}
+              handleSearch={handleSearch}
+              handleDelete={handleDelete}
+            />
+          )}
         </form>
       </div>
     </React.Fragment>
