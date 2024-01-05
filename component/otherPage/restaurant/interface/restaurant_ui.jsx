@@ -121,23 +121,22 @@ const RestaurantUI = () => {
     };
     if (data.name == "") {
       alert("name can't be empty");
-      return;
-    } else if (data.latlng.x == "") {
+    } else if (data.latlng.x == NaN) {
       alert("經度 can't be empty");
       return;
-    } else if (data.latlng.y == "") {
+    } else if (data.latlng.y == Nan) {
       alert("緯度 can't be empty");
       return;
-    } else if (data.stars == "") {
+    } else if (data.stars == NaN) {
       alert("星星數 can't be empty");
       return;
-    } else if (commentList.length == 0) {
+    } else if (data.comments.length == 0) {
       alert("評論 can't be empty");
       return;
-    } else if (urlList.length == 0) {
+    } else if (data.pictures.length == 0) {
       alert("URL can't be empty");
       return;
-    } else if (types.length == 0) {
+    } else if (data.types.length == 0) {
       alert("餐廳類別 can't be empty");
       return;
     } else if (
